@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://dvevfkgigl3up"]
+
+[ext_resource type="Texture2D" uid="uid://dwivy53nlpf02" path="res://icon.svg" id="1_e687w"]
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_vd1to"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ao5pi"]
+
+[node name="Enemy" type="CharacterBody3D"]
+transform = Transform3D(0.72, 0, 0, 0, 0.72, 0, 0, 0, 0.72, 0, 0, 0)
+script = ExtResource("1_vd1to")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_ao5pi")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+billboard = 1
+texture = ExtResource("1_e687w")

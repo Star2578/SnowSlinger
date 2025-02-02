@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://d22080urnkn8n"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_atv88"]
+[ext_resource type="Texture2D" uid="uid://dwivy53nlpf02" path="res://icon.svg" id="2_qphlv"]
+[ext_resource type="PackedScene" uid="uid://c21sqsj44jxmq" path="res://entities/snow_ball.tscn" id="2_xcdli"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3lmoj"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_o76xu"]
+
+[node name="Player" type="CharacterBody3D" groups=["Player"]]
+transform = Transform3D(0.72, 0, 0, 0, 0.72, 0, 0, 0, 0.72, 0, 0, 0)
+script = ExtResource("1_atv88")
+snowball_scene = ExtResource("2_xcdli")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1.38889, 0, 0, 0, 1.38889, 0, 0, 0, 1.38889, 0.276393, 0.843574, -0.482876)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera3D"]
+
+[node name="Control" type="Control" parent="Camera3D/CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Hand" type="Sprite2D" parent="Camera3D/CanvasLayer/Control"]
+position = Vector2(979, 528)
+texture = ExtResource("2_qphlv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_3lmoj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_o76xu")

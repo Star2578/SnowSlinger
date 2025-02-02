@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://bnbdos8dws6x8"]
+
+[ext_resource type="PackedScene" uid="uid://d22080urnkn8n" path="res://entities/player.tscn" id="1_8v88p"]
+[ext_resource type="PackedScene" uid="uid://dvevfkgigl3up" path="res://entities/enemy.tscn" id="2_cuciw"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_3ao5k"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_ln7gx"]
+
+[sub_resource type="Environment" id="Environment_vg1vu"]
+ambient_light_source = 2
+ambient_light_color = Color(0.813258, 0.813258, 0.813258, 1)
+ambient_light_energy = 1.5
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Player" parent="." instance=ExtResource("1_8v88p")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.47864, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(12.4, 0, 0, 0, 0.997, 0, 0, 0, 12.4, 0, 0.462901, 0)
+mesh = SubResource("PlaneMesh_3ao5k")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.462901, 0)
+shape = SubResource("WorldBoundaryShape3D_ln7gx")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_vg1vu")
+
+[node name="Enemy" parent="." instance=ExtResource("2_cuciw")]
+transform = Transform3D(0.72, 0, 0, 0, 0.72, 0, 0, 0, 0.72, 0.650927, 2.20063, -3.90858)
