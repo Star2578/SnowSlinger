@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://6bb5ckcsprj4"]
+
+[ext_resource type="Texture2D" uid="uid://bg1k2fmbdyslb" path="res://sprites/snowball.png" id="1_md7l0"]
+
+[node name="Snowball" type="Area3D"]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+billboard = 1
+texture = ExtResource("1_md7l0")

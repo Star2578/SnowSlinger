@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=2 format=3 uid="uid://cn8dsixa2xm1p"]
+
+[ext_resource type="Script" path="res://Resources/WeaponResource.gd" id="1_g6mf1"]
+
+[resource]
+script = ExtResource("1_g6mf1")
+type = 1
+automatic = false
+firing_sound = Array[AudioStream]([])
+damage = 0
+mag_size = 0
+spread = 0
+bullet_amount = 1
+fire_rate = 0.25

@@ -7,7 +7,7 @@ var initPos: Vector3
 
 func _ready():
 	initPos = position
-
+	print(position)
 func _process(delta):
 	if initPos.distance_to(position) > maxRange:
 		print("out of range")

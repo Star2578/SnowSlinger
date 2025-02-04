@@ -10,6 +10,17 @@ var gravity: float = ProjectSettings.get("physics/3d/default_gravity")
 
 var anim_player: AnimationPlayer
 
+
+#===============[player weapon]===================
+const SLINGSHOT = preload("res://Resources/Weapon/Slingshot.tres")
+const MELEE = preload("res://Resources/Weapon/Melee.tres")
+
+var current_weapon: Weapon = SLINGSHOT
+var current_ammo : int = 0
+var can_shoot : bool = true
+
+#=================================================
+
 func _ready():
 	anim_player = $Camera3D/CanvasLayer/Control/Hand/AnimationPlayer
 	camera = $Camera3D
@@ -20,8 +31,17 @@ func _input(event):
 		rotate_y(deg_to_rad(-event.relative.x * mouse_sensitivity))
 		camera.rotate_x(deg_to_rad(-event.relative.y * mouse_sensitivity))
 		camera.rotation_degrees.x = clamp(camera.rotation_degrees.x, -90, 90)
+		
 	if event.is_action_pressed("shoot"):
-		shoot_snowball()
+		$GunSystem.shoot()
+	
+	if event is InputEventKey and event.pressed:
+		if event.keycode == KEY_1:
+			print("G pressed")
+			test_gun_equip()
+		if event.keycode == KEY_3:
+			print("T pressed")
+			test_melee_equip()
 
 func _physics_process(delta):
 	if not is_on_floor():
@@ -41,15 +61,11 @@ func _physics_process(delta):
 		velocity.z = move_toward(velocity.z, 0, speed)
 
 	move_and_slide()
+	
 
-func shoot_snowball():
-	if not snowball_scene:
-		return
-	
-	anim_player.play("shoot")
-	
-	var snowball = snowball_scene.instantiate()
-	get_parent().add_child(snowball)
-	
-	# Set position to player's gun or camera
-	snowball.global_transform = $Camera3D.global_transform
+func test_gun_equip():
+	current_weapon = SLINGSHOT
+	$Camera3D/CanvasLayer/Control/Hand.texture = current_weapon.sprite
+func test_melee_equip():
+	current_weapon = MELEE
+	$Camera3D/CanvasLayer/Control/Hand.texture = current_weapon.sprite

@@ -5,14 +5,8 @@
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_utycp"]
 
-[node name="Snowball" type="Node3D"]
+[node name="Snowball" type="Area3D"]
 script = ExtResource("1_mt825")
-
-[node name="Area3D" type="Area3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
-shape = SubResource("SphereShape3D_utycp")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 cast_shadow = 0
@@ -20,4 +14,8 @@ billboard = 1
 texture_filter = 0
 texture = ExtResource("2_f83b1")
 
-[connection signal="body_entered" from="Area3D" to="." method="_on_Hit"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+shape = SubResource("SphereShape3D_utycp")
+
+[connection signal="body_entered" from="." to="." method="_on_Hit"]
