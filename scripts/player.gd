@@ -8,7 +8,10 @@ extends CharacterBody3D
 var camera: Camera3D
 var gravity: float = ProjectSettings.get("physics/3d/default_gravity")
 
+var anim_player: AnimationPlayer
+
 func _ready():
+	anim_player = $Camera3D/CanvasLayer/Control/Hand/AnimationPlayer
 	camera = $Camera3D
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
@@ -42,6 +45,8 @@ func _physics_process(delta):
 func shoot_snowball():
 	if not snowball_scene:
 		return
+	
+	anim_player.play("shoot")
 	
 	var snowball = snowball_scene.instantiate()
 	get_parent().add_child(snowball)

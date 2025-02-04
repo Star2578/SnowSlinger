@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://c21sqsj44jxmq"]
 
-[ext_resource type="Texture2D" uid="uid://dwivy53nlpf02" path="res://icon.svg" id="1_dedj4"]
 [ext_resource type="Script" path="res://scripts/snowball.gd" id="1_mt825"]
+[ext_resource type="Texture2D" uid="uid://bg1k2fmbdyslb" path="res://sprites/snowball.png" id="2_f83b1"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_utycp"]
 
@@ -11,11 +11,13 @@ script = ExtResource("1_mt825")
 [node name="Area3D" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 shape = SubResource("SphereShape3D_utycp")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(0.685923, 0, 0, 0, 0.685923, 0, 0, 0, 1, 0, 0, 0)
+cast_shadow = 0
 billboard = 1
-texture = ExtResource("1_dedj4")
+texture_filter = 0
+texture = ExtResource("2_f83b1")
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_Hit"]

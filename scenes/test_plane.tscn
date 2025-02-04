@@ -1,35 +1,44 @@
-[gd_scene load_steps=6 format=3 uid="uid://bnbdos8dws6x8"]
+[gd_scene load_steps=7 format=3 uid="uid://bnbdos8dws6x8"]
 
 [ext_resource type="PackedScene" uid="uid://d22080urnkn8n" path="res://entities/player.tscn" id="1_8v88p"]
 [ext_resource type="PackedScene" uid="uid://dvevfkgigl3up" path="res://entities/enemy.tscn" id="2_cuciw"]
 
+[sub_resource type="Environment" id="Environment_vg1vu"]
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 1.5
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_evb5u"]
+vertices = PackedVector3Array(-11.9, 0.962901, -11.9, -11.9, 0.962901, 11.85, 11.85, 0.962901, 11.85, 11.85, 0.962901, -11.9)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+
 [sub_resource type="PlaneMesh" id="PlaneMesh_3ao5k"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_ln7gx"]
-
-[sub_resource type="Environment" id="Environment_vg1vu"]
-ambient_light_source = 2
-ambient_light_color = Color(0.813258, 0.813258, 0.813258, 1)
-ambient_light_energy = 1.5
 
 [node name="Node3D" type="Node3D"]
 
 [node name="Player" parent="." instance=ExtResource("1_8v88p")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.47864, 0)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
-transform = Transform3D(12.4, 0, 0, 0, 0.997, 0, 0, 0, 12.4, 0, 0.462901, 0)
-mesh = SubResource("PlaneMesh_3ao5k")
-skeleton = NodePath("../..")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.462901, 0)
-shape = SubResource("WorldBoundaryShape3D_ln7gx")
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_vg1vu")
 
-[node name="Enemy" parent="." instance=ExtResource("2_cuciw")]
+[node name="Enemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_cuciw")]
 transform = Transform3D(0.72, 0, 0, 0, 0.72, 0, 0, 0, 0.72, 0.650927, 2.20063, -3.90858)
+player = NodePath("../Player")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_evb5u")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D"]
+transform = Transform3D(12.4, 0, 0, 0, 0.997, 0, 0, 0, 12.4, 0, 0.462901, 0)
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_3ao5k")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.462901, 0)
+shape = SubResource("WorldBoundaryShape3D_ln7gx")

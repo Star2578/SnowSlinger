@@ -8,10 +8,16 @@
 [node name="Enemy" type="CharacterBody3D"]
 transform = Transform3D(0.72, 0, 0, 0, 0.72, 0, 0, 0, 0.72, 0, 0, 0)
 script = ExtResource("1_vd1to")
+sprite = ExtResource("1_e687w")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_ao5pi")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
+cast_shadow = 0
 billboard = 1
+transparent = false
+render_priority = 1
 texture = ExtResource("1_e687w")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]

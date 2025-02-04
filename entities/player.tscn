@@ -1,8 +1,45 @@
-[gd_scene load_steps=6 format=3 uid="uid://d22080urnkn8n"]
+[gd_scene load_steps=9 format=3 uid="uid://d22080urnkn8n"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_atv88"]
-[ext_resource type="Texture2D" uid="uid://dwivy53nlpf02" path="res://icon.svg" id="2_qphlv"]
 [ext_resource type="PackedScene" uid="uid://c21sqsj44jxmq" path="res://entities/snow_ball.tscn" id="2_xcdli"]
+[ext_resource type="Texture2D" uid="uid://bjw0lxuhawb4i" path="res://sprites/sling.png" id="3_7sjxu"]
+
+[sub_resource type="Animation" id="Animation_0d0eo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(946, 472)]
+}
+
+[sub_resource type="Animation" id="Animation_wqrut"]
+resource_name = "shoot"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.233333, 0.5),
+"transitions": PackedFloat32Array(1, -2, 1),
+"update": 0,
+"values": [Vector2(946, 472), Vector2(946, 555), Vector2(946, 472)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gyhxs"]
+_data = {
+"RESET": SubResource("Animation_0d0eo"),
+"shoot": SubResource("Animation_wqrut")
+}
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3lmoj"]
 
@@ -14,7 +51,7 @@ script = ExtResource("1_atv88")
 snowball_scene = ExtResource("2_xcdli")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1.38889, 0, 0, 0, 1.38889, 0, 0, 0, 1.38889, 0.276393, 0.843574, -0.482876)
+transform = Transform3D(1.38889, 0, 0, 0, 1.38889, 0, 0, 0, 1.38889, 0, 0.708191, 0)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera3D"]
 
@@ -27,11 +64,18 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Hand" type="Sprite2D" parent="Camera3D/CanvasLayer/Control"]
-position = Vector2(979, 528)
-texture = ExtResource("2_qphlv")
+position = Vector2(946, 472)
+scale = Vector2(16, 16)
+texture = ExtResource("3_7sjxu")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera3D/CanvasLayer/Control/Hand"]
+libraries = {
+"": SubResource("AnimationLibrary_gyhxs")
+}
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_3lmoj")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+cast_shadow = 0
 mesh = SubResource("CapsuleMesh_o76xu")
