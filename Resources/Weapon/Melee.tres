@@ -1,11 +1,13 @@
-[gd_resource type="Resource" script_class="Weapon" load_steps=2 format=3 uid="uid://cn8dsixa2xm1p"]
+[gd_resource type="Resource" script_class="Weapon" load_steps=3 format=3 uid="uid://cn8dsixa2xm1p"]
 
 [ext_resource type="Script" path="res://Resources/WeaponResource.gd" id="1_g6mf1"]
+[ext_resource type="Texture2D" uid="uid://bpdakbfqykm01" path="res://sprites/punch.png" id="2_1jpul"]
 
 [resource]
 script = ExtResource("1_g6mf1")
-type = 1
+type = 0
 automatic = false
+sprite = ExtResource("2_1jpul")
 firing_sound = Array[AudioStream]([])
 damage = 0
 mag_size = 0

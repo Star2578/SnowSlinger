@@ -1,0 +1,68 @@
+[gd_scene load_steps=8 format=3 uid="uid://m1hhi2d72nih"]
+
+[ext_resource type="PackedScene" uid="uid://d22080urnkn8n" path="res://entities/player.tscn" id="1_477sc"]
+
+[sub_resource type="Environment" id="Environment_ih4fx"]
+background_mode = 2
+background_color = Color(0.699653, 0.699653, 0.699653, 1)
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 1.5
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0.8, 0.8, 0.85, 1)
+fog_density = 1.0
+fog_height_density = 0.8
+fog_depth_curve = 0.5
+fog_depth_begin = 5.0
+fog_depth_end = 15.0
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_6vfxx"]
+vertices = PackedVector3Array(-50.15, 0.962901, -50.15, -50.15, 0.962901, 50.1, 50.1, 0.962901, 50.1, 50.1, 0.962901, -50.15)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_i1q0c"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_7me05"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pbj7v"]
+emission_shape_scale = Vector3(4, 8, 4)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1.5, 1)
+gravity = Vector3(0, -1, 0)
+scale_min = 0.1
+scale_max = 0.3
+
+[sub_resource type="BoxMesh" id="BoxMesh_xh65a"]
+
+[node name="Forest" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ih4fx")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_6vfxx")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D"]
+transform = Transform3D(50.65, 0, 0, 0, 0.396, 0, 0, 0, 50.65, 0, 0.462901, 0)
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_i1q0c")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.462901, 0)
+shape = SubResource("WorldBoundaryShape3D_7me05")
+
+[node name="Player" parent="." instance=ExtResource("1_477sc")]
+transform = Transform3D(0.72, 0, 0, 0, 0.72, 0, 0, 0, 0.72, 4.10415, 3.39557, 5.99124)
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(12.116, 0, 0, 0, 1.6061, 0, 0, 0, 12.116, 0, 21.8865, 0)
+amount = 200
+amount_ratio = 0.8
+lifetime = 4.0
+randomness = 0.2
+process_material = SubResource("ParticleProcessMaterial_pbj7v")
+draw_pass_1 = SubResource("BoxMesh_xh65a")

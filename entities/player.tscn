@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://d22080urnkn8n"]
+[gd_scene load_steps=13 format=3 uid="uid://d22080urnkn8n"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_dq7tu"]
 [ext_resource type="PackedScene" uid="uid://c21sqsj44jxmq" path="res://entities/snow_ball.tscn" id="2_22pw7"]
 [ext_resource type="PackedScene" uid="uid://csa8tyw6aem4t" path="res://System/gun_system.tscn" id="2_bfkib"]
 [ext_resource type="Texture2D" uid="uid://bjw0lxuhawb4i" path="res://sprites/sling.png" id="3_7sjxu"]
+[ext_resource type="Shader" path="res://shader/fog.gdshader" id="5_l1dlv"]
 
 [sub_resource type="Animation" id="Animation_0d0eo"]
 length = 0.001
@@ -42,6 +43,25 @@ _data = {
 "shoot": SubResource("Animation_wqrut")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nfl7w"]
+render_priority = 0
+shader = ExtResource("5_l1dlv")
+shader_parameter/enable_fog = true
+shader_parameter/fog_color = null
+shader_parameter/noise_color = null
+shader_parameter/fog_distance = 25.0
+shader_parameter/fog_fade_range = 10.0
+shader_parameter/enable_noise = true
+shader_parameter/noise_time_fac = 4.0
+shader_parameter/enable_color_limitation = true
+shader_parameter/color_levels = 32
+shader_parameter/enable_dithering = true
+shader_parameter/dither_strength = 0.3
+
+[sub_resource type="QuadMesh" id="QuadMesh_0yov2"]
+material = SubResource("ShaderMaterial_nfl7w")
+size = Vector2(2, 2)
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3lmoj"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_o76xu"]
@@ -76,6 +96,9 @@ texture = ExtResource("3_7sjxu")
 libraries = {
 "": SubResource("AnimationLibrary_gyhxs")
 }
+
+[node name="Fog" type="MeshInstance3D" parent="Camera3D"]
+mesh = SubResource("QuadMesh_0yov2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_3lmoj")
