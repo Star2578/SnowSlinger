@@ -9,7 +9,8 @@ var current_ammo : int
 
 func reload():
 	current_weapon = parent.current_weapon
-	
+	if parent.is_reload:
+		return
 	if current_weapon.type == Weapon.WeaponType.MELEE:
 		return
 	if parent.current_ammo == current_weapon.mag_size:
