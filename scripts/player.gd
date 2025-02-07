@@ -11,15 +11,21 @@ var gravity: float = ProjectSettings.get("physics/3d/default_gravity")
 
 var anim_player: AnimationPlayer
 
-	
 #===============[player weapon]===================
-const SLINGSHOT = preload("res://Resources/Weapon/Slingshot.tres")
 const MELEE = preload("res://Resources/Weapon/Melee.tres")
+const SHOTGUN = preload("res://Resources/Weapon/Shotgun.tres")
+const SLINGSHOT = preload("res://Resources/Weapon/Slingshot.tres")
+const SNIPER = preload("res://Resources/Weapon/Sniper.tres")
+const SUB_SNOWGUN = preload("res://Resources/Weapon/SubSnowgun.tres")
 
 var current_weapon: Weapon = SLINGSHOT
+var stored_ammo : int = 90
 var current_ammo : int = 0
 var can_shoot : bool = true
-
+var shootbutton_down : bool = false
+var is_reload: bool = false
+var is_zoom : bool = false
+var is_equip : bool = false
 #=================================================
 
 func _ready():
@@ -32,18 +38,21 @@ func _input(event):
 		rotate_y(deg_to_rad(-event.relative.x * mouse_sensitivity))
 		camera.rotate_x(deg_to_rad(-event.relative.y * mouse_sensitivity))
 		camera.rotation_degrees.x = clamp(camera.rotation_degrees.x, -90, 90)
-		
-	if event.is_action_pressed("shoot"):
-		$GunSystem.shoot()
 	
 	if event is InputEventKey and event.pressed:
-		if event.keycode == KEY_1:
-			print("G pressed")
-			test_gun_equip()
-		if event.keycode == KEY_3:
-			print("T pressed")
-			test_melee_equip()
-		if event.keycode == KEY_ESCAPE:
+		match event.keycode:
+			KEY_1:
+				hotbar_swapto(1)
+			KEY_2:
+				hotbar_swapto(2)
+			KEY_3:
+				hotbar_swapto(3)
+			KEY_R:
+				$GunSystem.reload()
+				
+		if event.keycode == KEY_Y:
+			print(current_ammo,"/",stored_ammo)
+		if event.keycode == KEY_O:
 			# show cursor
 			if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
@@ -51,6 +60,18 @@ func _input(event):
 				Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _physics_process(delta):
+
+	#auto vs semi-auto
+	if Input.is_action_just_pressed("shoot") and !current_weapon.automatic:
+		$GunSystem.shoot()
+		#Automatic
+	elif Input.is_action_pressed("shoot") and current_weapon.automatic:
+		$GunSystem.shoot()
+	
+
+	if Input.is_action_just_pressed("right_action"):
+		$GunSystem.perform_left_click()
+	
 	if not is_on_floor():
 		velocity.y -= gravity * delta  # Apply gravity
 
@@ -78,13 +99,13 @@ func _physics_process(delta):
 			
 	move_and_slide()
 	
-
 func _loop_bgm():
 	$AudioStreamPlayer3D.play()
 
-func test_gun_equip():
-	current_weapon = SLINGSHOT
-	$Camera3D/CanvasLayer/Control/Hand.texture = current_weapon.sprite
-func test_melee_equip():
-	current_weapon = MELEE
-	$Camera3D/CanvasLayer/Control/Hand.texture = current_weapon.sprite
+func hotbar_swapto(n : int):
+	if n == 1:
+		$GunSystem.perform_swap_action(SLINGSHOT)
+	elif n == 2:
+		pass
+	elif n == 3:
+		$GunSystem.perform_swap_action(MELEE)
