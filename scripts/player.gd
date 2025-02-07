@@ -63,6 +63,9 @@ func _physics_process(delta):
 	move_and_slide()
 	
 
+func _loop_bgm():
+	$AudioStreamPlayer3D.play()
+
 func test_gun_equip():
 	current_weapon = SLINGSHOT
 	$Camera3D/CanvasLayer/Control/Hand.texture = current_weapon.sprite

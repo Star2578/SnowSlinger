@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Ammo" load_steps=3 format=3 uid="uid://iairatkv68xi"]
+
+[ext_resource type="Script" path="res://items/ammo/ammo.gd" id="1_hnae8"]
+[ext_resource type="Texture2D" uid="uid://cm5r4eg4wnn7a" path="res://sprites/item_ammo.png" id="2_3tv5f"]
+
+[resource]
+script = ExtResource("1_hnae8")
+sprite = ExtResource("2_3tv5f")
+item_name = "Ammo"

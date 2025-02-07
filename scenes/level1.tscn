@@ -1,8 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://m1hhi2d72nih"]
+[gd_scene load_steps=13 format=3 uid="uid://m1hhi2d72nih"]
 
 [ext_resource type="PackedScene" uid="uid://d22080urnkn8n" path="res://entities/player.tscn" id="1_477sc"]
 [ext_resource type="PackedScene" uid="uid://ducamiudxh34i" path="res://models/tree.tscn" id="2_7fkk5"]
 [ext_resource type="PackedScene" uid="uid://dostdn12q2cqy" path="res://scenes/wall.tscn" id="3_ybyso"]
+[ext_resource type="PackedScene" uid="uid://d1ju14bharin4" path="res://models/item.tscn" id="4_66mnd"]
+[ext_resource type="Resource" uid="uid://iairatkv68xi" path="res://items/ammo/ammo.tres" id="5_hxmka"]
 
 [sub_resource type="Environment" id="Environment_ih4fx"]
 background_mode = 1
@@ -13,6 +15,7 @@ ambient_light_energy = 1.5
 tonemap_exposure = 1.2
 fog_enabled = true
 fog_mode = 1
+fog_light_color = Color(0.75, 0.75, 0.75, 1)
 fog_density = 1.0
 fog_height_density = 0.8
 fog_depth_curve = 0.5
@@ -35,8 +38,8 @@ emission_shape_scale = Vector3(4, 8, 4)
 emission_shape = 3
 emission_box_extents = Vector3(1, 1.5, 1)
 gravity = Vector3(0, -1, 0)
-scale_min = 0.1
-scale_max = 0.3
+scale_min = 0.2
+scale_max = 0.4
 
 [sub_resource type="BoxMesh" id="BoxMesh_xh65a"]
 
@@ -104,7 +107,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.43745, 2.8629, -11.5263)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.54702, 2.8629, -36.8457)
 
 [node name="Player" parent="." instance=ExtResource("1_477sc")]
-transform = Transform3D(0.72, 0, 0, 0, 0.72, 0, 0, 0, 0.72, 4.10415, 3.39557, 5.99124)
+transform = Transform3D(0.72, 0, 0, 0, 0.72, 0, 0, 0, 0.72, 4.10415, 1.1829, 5.99124)
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(12.116, 0, 0, 0, 1.6061, 0, 0, 0, 12.116, 0, 21.8865, 0)
@@ -130,3 +133,7 @@ mesh = null
 [node name="MeshInstance3D4" parent="." instance=ExtResource("3_ybyso")]
 transform = Transform3D(-1.34071e-08, 0, 119.362, 0, 48.9245, 0, -0.306718, 0, -5.2175e-06, -7.30794, 23.1952, 43.5048)
 mesh = null
+
+[node name="Ammo" parent="." instance=ExtResource("4_66mnd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0681, 0.962901, 9.39904)
+item = ExtResource("5_hxmka")
