@@ -21,9 +21,11 @@ func reload():
 		toggle_zoom()
 	
 	parent.is_reload = true
+	#parent.anim_player.speed_scale = current_weapon.reload_time/
 	parent.anim_player.play("Reload")
 
 	await parent.anim_player.animation_finished
+	parent.anim_player.speed_scale = 1
 	print("reloaded!!")
 	
 	var remain = parent.current_ammo
@@ -53,7 +55,7 @@ func shoot():
 		
 		parent.anim_player.play("shoot")
 		
-		parent.current_ammo = max(0,parent.current_ammo - current_weapon.bullet_amount)
+		parent.current_ammo = max(0,parent.current_ammo - 1)
 		
 		match current_weapon.type:
 			Weapon.WeaponType.MELEE:
@@ -124,7 +126,9 @@ func shoot():
 				snowball.global_transform.origin = 	 $"../Camera3D".global_transform.origin + ( - $"../Camera3D".global_transform.basis.z * 0.5)
 		
 		
-func perform_swap_action(weapon:Weapon):
+func perform_swap_action(new_weapon:Weapon , from_floor:bool = false):
+	if parent.current_weapon.type == new_weapon.type and not from_floor: 
+		return
 	if parent.is_reload or parent.is_equip:
 		return	
 	if parent.is_zoom:
@@ -142,19 +146,18 @@ func perform_swap_action(weapon:Weapon):
 	
 	parent.anim_player.play("Equip")
 	
+	if (new_weapon.type != Weapon.WeaponType.MELEE) or (parent.current_weapon.type != Weapon.WeaponType.MELEE):
+		parent.current_ammo = 0 #reset ammo on pick up new gun
+	
 	#change weapon & sprite
-	parent.current_weapon = weapon 
+	parent.current_weapon = new_weapon 
 	current_weapon = parent.current_weapon
 	$"../Camera3D/CanvasLayer/Control/Hand".texture = current_weapon.sprite #new sprite
 	
 	parent.is_equip = false
 	
-func change_gun(new_weapon : Weapon):
-	perform_swap_action(new_weapon)
-	if new_weapon.type != Weapon.WeaponType.MELEE:
-		parent.current_ammo = 0 #reset ammo on pick up new gun
 
-func perform_left_click():
+func perform_right_click():
 	if parent.is_reload:
 		return
 	if parent.current_weapon.type == Weapon.WeaponType.SNIPER:

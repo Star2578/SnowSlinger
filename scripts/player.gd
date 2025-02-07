@@ -19,8 +19,9 @@ const SNIPER = preload("res://Resources/Weapon/Sniper.tres")
 const SUB_SNOWGUN = preload("res://Resources/Weapon/SubSnowgun.tres")
 
 var current_weapon: Weapon = SLINGSHOT
+var current_slot : int = 1
 var stored_ammo : int = 90
-var current_ammo : int = 0
+var current_ammo : int = current_weapon.mag_size
 var can_shoot : bool = true
 var shootbutton_down : bool = false
 var is_reload: bool = false
@@ -44,7 +45,7 @@ func _input(event):
 			KEY_1:
 				hotbar_swapto(1)
 			KEY_2:
-				hotbar_swapto(2)
+				pass
 			KEY_3:
 				hotbar_swapto(3)
 			KEY_R:
@@ -70,7 +71,7 @@ func _physics_process(delta):
 	
 
 	if Input.is_action_just_pressed("right_action"):
-		$GunSystem.perform_left_click()
+		$GunSystem.perform_right_click()
 	
 	if not is_on_floor():
 		velocity.y -= gravity * delta  # Apply gravity
