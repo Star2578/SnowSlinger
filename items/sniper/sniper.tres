@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Sniper" load_steps=3 format=3 uid="uid://7vx7ojx1jqn0"]
+
+[ext_resource type="Script" path="res://items/sniper/sniper.gd" id="1_4de7i"]
+[ext_resource type="Texture2D" uid="uid://dhrg2cgbsdsnt" path="res://sprites/item_sniper.png" id="2_iro8a"]
+
+[resource]
+script = ExtResource("1_4de7i")
+sprite = ExtResource("2_iro8a")
+item_name = "Sniper"

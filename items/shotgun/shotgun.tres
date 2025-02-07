@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Shotgun" load_steps=3 format=3 uid="uid://34fehmarmxyj"]
+
+[ext_resource type="Script" path="res://items/shotgun/shotgun.gd" id="1_76acu"]
+[ext_resource type="Texture2D" uid="uid://cid3lbjj7fs1k" path="res://sprites/item_shotgun.png" id="2_jayel"]
+
+[resource]
+script = ExtResource("1_76acu")
+sprite = ExtResource("2_jayel")
+item_name = "Shotgun"

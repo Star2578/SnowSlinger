@@ -1,10 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://m1hhi2d72nih"]
+[gd_scene load_steps=12 format=3 uid="uid://m1hhi2d72nih"]
 
 [ext_resource type="PackedScene" uid="uid://d22080urnkn8n" path="res://entities/player.tscn" id="1_477sc"]
 [ext_resource type="PackedScene" uid="uid://ducamiudxh34i" path="res://models/tree.tscn" id="2_7fkk5"]
 [ext_resource type="PackedScene" uid="uid://dostdn12q2cqy" path="res://scenes/wall.tscn" id="3_ybyso"]
-[ext_resource type="PackedScene" uid="uid://d1ju14bharin4" path="res://models/item.tscn" id="4_66mnd"]
-[ext_resource type="Resource" uid="uid://iairatkv68xi" path="res://items/ammo/ammo.tres" id="5_hxmka"]
+[ext_resource type="PackedScene" uid="uid://b6x1e677aeyrl" path="res://models/campfire.tscn" id="4_j33yu"]
 
 [sub_resource type="Environment" id="Environment_ih4fx"]
 background_mode = 1
@@ -20,7 +19,7 @@ fog_density = 1.0
 fog_height_density = 0.8
 fog_depth_curve = 0.5
 fog_depth_begin = 5.0
-fog_depth_end = 15.0
+fog_depth_end = 10.0
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_6vfxx"]
 vertices = PackedVector3Array(-50.15, 0.962901, -50.15, -50.15, 0.962901, 50.1, 50.1, 0.962901, 50.1, 50.1, 0.962901, -50.15)
@@ -106,6 +105,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.43745, 2.8629, -11.5263)
 [node name="Tree14" parent="NavigationRegion3D" instance=ExtResource("2_7fkk5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.54702, 2.8629, -36.8457)
 
+[node name="Campfire" parent="NavigationRegion3D" instance=ExtResource("4_j33yu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7918, 1.00233, 1.58013)
+
 [node name="Player" parent="." instance=ExtResource("1_477sc")]
 transform = Transform3D(0.72, 0, 0, 0, 0.72, 0, 0, 0, 0.72, 4.10415, 1.1829, 5.99124)
 
@@ -133,7 +135,3 @@ mesh = null
 [node name="MeshInstance3D4" parent="." instance=ExtResource("3_ybyso")]
 transform = Transform3D(-1.34071e-08, 0, 119.362, 0, 48.9245, 0, -0.306718, 0, -5.2175e-06, -7.30794, 23.1952, 43.5048)
 mesh = null
-
-[node name="Ammo" parent="." instance=ExtResource("4_66mnd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0681, 0.962901, 9.39904)
-item = ExtResource("5_hxmka")

@@ -1,6 +1,5 @@
 extends CharacterBody3D
 
-@export var mouse_sensitivity: float = 0.1
 @export var speed: float = 5.0
 @export var jump_velocity: float = 4.5
 @export var snowball_scene: PackedScene
@@ -27,11 +26,12 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _input(event):
+	# Mouse Look (Controller uses Joystick)
 	if event is InputEventMouseMotion:
-		rotate_y(deg_to_rad(-event.relative.x * mouse_sensitivity))
-		camera.rotate_x(deg_to_rad(-event.relative.y * mouse_sensitivity))
+		rotate_y(deg_to_rad(-event.relative.x * GameManager.mouse_sensitivity))
+		camera.rotate_x(deg_to_rad(-event.relative.y * GameManager.mouse_sensitivity))
 		camera.rotation_degrees.x = clamp(camera.rotation_degrees.x, -90, 90)
-		
+
 	if event.is_action_pressed("shoot"):
 		$GunSystem.shoot()
 	
@@ -46,6 +46,15 @@ func _input(event):
 func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y -= gravity * delta  # Apply gravity
+		
+	# Controller Look (Right Stick)
+	var look_x = Input.get_action_strength("look_right") - Input.get_action_strength("look_left")
+	var look_y = Input.get_action_strength("look_down") - Input.get_action_strength("look_up")
+	
+	if abs(look_x) > 0.1 or abs(look_y) > 0.1:
+		rotate_y(deg_to_rad(-look_x * GameManager.mouse_sensitivity * 5))
+		camera.rotate_x(deg_to_rad(-look_y * GameManager.mouse_sensitivity * 5))
+		camera.rotation_degrees.x = clamp(camera.rotation_degrees.x, -90, 90)
 
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = jump_velocity  # Jumping

@@ -1,7 +1,84 @@
-[gd_scene load_steps=2 format=3 uid="uid://bfn750ftkefcu"]
+[gd_scene load_steps=4 format=3 uid="uid://bfn750ftkefcu"]
 
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_isadf"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2pse2"]
+font_size = 42
+
+[sub_resource type="LabelSettings" id="LabelSettings_v5e1a"]
+font_size = 24
 
 [node name="GameManager" type="Node"]
 process_mode = 3
 script = ExtResource("1_isadf")
+
+[node name="Pause" type="CanvasLayer" parent="."]
+layer = 2
+visible = false
+
+[node name="Control" type="Control" parent="Pause"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="Pause/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Pause/Control/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -74.0
+offset_top = -117.0
+offset_right = 74.0
+offset_bottom = -59.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Paused"
+label_settings = SubResource("LabelSettings_2pse2")
+
+[node name="Sens" type="Label" parent="Pause/Control/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -241.0
+offset_top = -17.0
+offset_right = -122.0
+offset_bottom = 17.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Sensitivity"
+label_settings = SubResource("LabelSettings_v5e1a")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sensitivity" type="HScrollBar" parent="Pause/Control/Panel/Sens"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 129.0
+offset_top = -6.0
+offset_right = 329.0
+offset_bottom = 2.0
+grow_vertical = 2
+scale = Vector2(2, 2)
+min_value = -1.0
+max_value = 2.0
+step = 0.01
+
+[connection signal="value_changed" from="Pause/Control/Panel/Sens/Sensitivity" to="." method="_sensitivity_changed"]

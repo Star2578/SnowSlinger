@@ -7,6 +7,7 @@ extends Node3D
 func _ready():
 	if item and sprite3d:
 		sprite3d.texture = item.sprite
+	$Sprite3D/AnimationPlayer.play("idle")
 
 func _on_pick(body: Node3D):
 	if body.is_in_group("Player"):
