@@ -1,0 +1,94 @@
+[gd_scene load_steps=6 format=3 uid="uid://cbnm33erqvut"]
+
+[ext_resource type="Texture2D" uid="uid://bg1k2fmbdyslb" path="res://sprites/snowball.png" id="1_7dg8s"]
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_adlss"]
+[ext_resource type="Texture2D" uid="uid://b4alpjjfoyvah" path="res://sprites/title.png" id="2_wajw2"]
+[ext_resource type="AudioStream" uid="uid://boke6doviuldk" path="res://audio/Ducko - Continuation.wav" id="4_2d56b"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8brhp"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(600, 20, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+gravity = Vector3(0, 50, 0)
+scale_min = 0.3
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_adlss")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="ColorRect"]
+position = Vector2(576, 0)
+amount = 60
+amount_ratio = 0.8
+process_material = SubResource("ParticleProcessMaterial_8brhp")
+texture = ExtResource("1_7dg8s")
+lifetime = 5.0
+
+[node name="Buttons" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 95.0
+offset_top = 45.0
+offset_right = 135.0
+offset_bottom = 85.0
+grow_vertical = 2
+
+[node name="Start" type="Button" parent="Buttons"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -21.0
+offset_right = 128.0
+offset_bottom = 21.0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+text = "Start"
+alignment = 0
+
+[node name="Quit" type="Button" parent="Buttons"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = 48.0
+offset_right = 128.0
+offset_bottom = 90.0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+text = "Quit"
+alignment = 0
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+offset_left = 24.0
+offset_top = 102.0
+offset_right = 216.0
+offset_bottom = 142.0
+scale = Vector2(4, 4)
+texture = ExtResource("2_wajw2")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_2d56b")
+autoplay = true
+
+[connection signal="pressed" from="Buttons/Start" to="." method="_on_start"]
+[connection signal="pressed" from="Buttons/Quit" to="." method="_on_quit"]
+[connection signal="finished" from="AudioStreamPlayer2D" to="." method="_loop_bgm"]

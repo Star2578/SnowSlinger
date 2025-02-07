@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://ducamiudxh34i"]
+
+[ext_resource type="Texture2D" uid="uid://dm2bhimtii1pj" path="res://sprites/tree.png" id="1_iy1qv"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o0lq2"]
+
+[node name="Tree" type="Node3D"]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, 0, 0, 0)
+billboard = 1
+texture_filter = 0
+render_priority = 2
+texture = ExtResource("1_iy1qv")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_o0lq2")

@@ -1,16 +1,18 @@
-[gd_scene load_steps=8 format=3 uid="uid://m1hhi2d72nih"]
+[gd_scene load_steps=11 format=3 uid="uid://m1hhi2d72nih"]
 
 [ext_resource type="PackedScene" uid="uid://d22080urnkn8n" path="res://entities/player.tscn" id="1_477sc"]
+[ext_resource type="PackedScene" uid="uid://ducamiudxh34i" path="res://models/tree.tscn" id="2_7fkk5"]
+[ext_resource type="PackedScene" uid="uid://dostdn12q2cqy" path="res://scenes/wall.tscn" id="3_ybyso"]
 
 [sub_resource type="Environment" id="Environment_ih4fx"]
-background_mode = 2
-background_color = Color(0.699653, 0.699653, 0.699653, 1)
+background_mode = 1
+background_color = Color(0.749781, 0.74978, 0.74978, 1)
 ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
 ambient_light_energy = 1.5
+tonemap_exposure = 1.2
 fog_enabled = true
 fog_mode = 1
-fog_light_color = Color(0.8, 0.8, 0.85, 1)
 fog_density = 1.0
 fog_height_density = 0.8
 fog_depth_curve = 0.5
@@ -22,6 +24,9 @@ vertices = PackedVector3Array(-50.15, 0.962901, -50.15, -50.15, 0.962901, 50.1, 
 polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_i1q0c"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2wnxv"]
+shading_mode = 0
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_7me05"]
 
@@ -50,10 +55,53 @@ transform = Transform3D(50.65, 0, 0, 0, 0.396, 0, 0, 0, 50.65, 0, 0.462901, 0)
 cast_shadow = 0
 mesh = SubResource("PlaneMesh_i1q0c")
 skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_2wnxv")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.462901, 0)
 shape = SubResource("WorldBoundaryShape3D_7me05")
+
+[node name="Tree" parent="NavigationRegion3D" instance=ExtResource("2_7fkk5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.0306, 2.8629, 27.3908)
+
+[node name="Tree2" parent="NavigationRegion3D" instance=ExtResource("2_7fkk5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5295, 2.8629, 11.4533)
+
+[node name="Tree3" parent="NavigationRegion3D" instance=ExtResource("2_7fkk5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.6741, 2.8629, -14.2816)
+
+[node name="Tree4" parent="NavigationRegion3D" instance=ExtResource("2_7fkk5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.8952, 2.8629, -14.2816)
+
+[node name="Tree5" parent="NavigationRegion3D" instance=ExtResource("2_7fkk5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.8952, 2.8629, 3.7892)
+
+[node name="Tree6" parent="NavigationRegion3D" instance=ExtResource("2_7fkk5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.9986, 2.8629, 27.3908)
+
+[node name="Tree7" parent="NavigationRegion3D" instance=ExtResource("2_7fkk5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.9986, 2.8629, -28.5001)
+
+[node name="Tree8" parent="NavigationRegion3D" instance=ExtResource("2_7fkk5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.9389, 2.8629, -28.5001)
+
+[node name="Tree9" parent="NavigationRegion3D" instance=ExtResource("2_7fkk5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.5299, 2.8629, -28.5001)
+
+[node name="Tree10" parent="NavigationRegion3D" instance=ExtResource("2_7fkk5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.5299, 2.8629, 27.4979)
+
+[node name="Tree11" parent="NavigationRegion3D" instance=ExtResource("2_7fkk5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.8866, 2.8629, 35.2951)
+
+[node name="Tree12" parent="NavigationRegion3D" instance=ExtResource("2_7fkk5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.7276, 2.8629, 3.294)
+
+[node name="Tree13" parent="NavigationRegion3D" instance=ExtResource("2_7fkk5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.43745, 2.8629, -11.5263)
+
+[node name="Tree14" parent="NavigationRegion3D" instance=ExtResource("2_7fkk5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.54702, 2.8629, -36.8457)
 
 [node name="Player" parent="." instance=ExtResource("1_477sc")]
 transform = Transform3D(0.72, 0, 0, 0, 0.72, 0, 0, 0, 0.72, 4.10415, 3.39557, 5.99124)
@@ -66,3 +114,19 @@ lifetime = 4.0
 randomness = 0.2
 process_material = SubResource("ParticleProcessMaterial_pbj7v")
 draw_pass_1 = SubResource("BoxMesh_xh65a")
+
+[node name="MeshInstance3D" parent="." instance=ExtResource("3_ybyso")]
+transform = Transform3D(0.306718, 0, 0, 0, 48.9245, 0, 0, 0, 119.362, 44.0746, 23.1952, -1.37188)
+mesh = null
+
+[node name="MeshInstance3D2" parent="." instance=ExtResource("3_ybyso")]
+transform = Transform3D(0.306718, 0, 0, 0, 48.9245, 0, 0, 0, 119.362, -44.7976, 23.1525, -0.532439)
+mesh = null
+
+[node name="MeshInstance3D3" parent="." instance=ExtResource("3_ybyso")]
+transform = Transform3D(-1.34071e-08, 0, 119.362, 0, 48.9245, 0, -0.306718, 0, -5.2175e-06, -8.46252, 23.0952, -45.5151)
+mesh = null
+
+[node name="MeshInstance3D4" parent="." instance=ExtResource("3_ybyso")]
+transform = Transform3D(-1.34071e-08, 0, 119.362, 0, 48.9245, 0, -0.306718, 0, -5.2175e-06, -7.30794, 23.1952, 43.5048)
+mesh = null
