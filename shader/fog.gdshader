@@ -6,7 +6,7 @@ uniform sampler2D screen_texture : source_color, hint_screen_texture, repeat_dis
 
 uniform bool enable_fog = true; 
 uniform vec3 fog_color : source_color;
-uniform vec3 noise_color : source_color;
+uniform vec3 noise_color : source_color	;
 uniform float fog_distance : hint_range(1, 6000) = 100;
 uniform float fog_fade_range : hint_range(1, 6000) = 50;
 uniform bool enable_noise = true;

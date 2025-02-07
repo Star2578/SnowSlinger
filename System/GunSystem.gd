@@ -27,9 +27,12 @@ func shoot():
 		parent.get_parent().add_child(snowball)
 		
 		# Set position to player's gun or camera
+		#snowball.position = parent.position
+		print(snowball.position)
 		snowball.global_transform = $"../Camera3D".global_transform
-		print($"../Camera3D".global_transform)
+		#print($"../Camera3D".global_transform)
 		# some distance between camara
+		snowball.initPos = $"../Camera3D".global_position
 		snowball.global_transform.origin = 	 $"../Camera3D".global_transform.origin + ( - $"../Camera3D".global_transform.basis.z * 0.5)
 
 		# cooldown by firerate (bullet/sec)

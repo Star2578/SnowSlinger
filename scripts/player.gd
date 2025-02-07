@@ -1,7 +1,8 @@
 extends CharacterBody3D
 
 @export var mouse_sensitivity: float = 0.1
-@export var speed: float = 5.0
+@export var speed: float = 4.0
+@export var floating_penalty : float = 1
 @export var jump_velocity: float = 4.5
 @export var snowball_scene: PackedScene
 
@@ -10,7 +11,7 @@ var gravity: float = ProjectSettings.get("physics/3d/default_gravity")
 
 var anim_player: AnimationPlayer
 
-
+	
 #===============[player weapon]===================
 const SLINGSHOT = preload("res://Resources/Weapon/Slingshot.tres")
 const MELEE = preload("res://Resources/Weapon/Melee.tres")
@@ -42,6 +43,12 @@ func _input(event):
 		if event.keycode == KEY_3:
 			print("T pressed")
 			test_melee_equip()
+		if event.keycode == KEY_ESCAPE:
+			# show cursor
+			if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			else:
+				Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _physics_process(delta):
 	if not is_on_floor():
@@ -54,12 +61,21 @@ func _physics_process(delta):
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 
 	if direction:
-		velocity.x = direction.x * speed
-		velocity.z = direction.z * speed
+		if velocity.y != 0:
+			velocity.x = direction.x * speed * floating_penalty 
+			velocity.z = direction.z * speed * floating_penalty
+		else:
+			velocity.x = direction.x * speed 
+			velocity.z = direction.z * speed
 	else:
-		velocity.x = move_toward(velocity.x, 0, speed)
-		velocity.z = move_toward(velocity.z, 0, speed)
-
+		if velocity.y != 0:
+			#floating
+			velocity.x = move_toward(velocity.x, 0, delta * 3)
+			velocity.z = move_toward(velocity.z, 0, delta * 3)
+		else:
+			velocity.x = 0
+			velocity.z = 0
+			
 	move_and_slide()
 	
 

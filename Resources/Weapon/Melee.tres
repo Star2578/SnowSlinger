@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_g6mf1")
 type = 0
-automatic = false
+automatic = true
 sprite = ExtResource("2_1jpul")
 firing_sound = Array[AudioStream]([])
 damage = 0

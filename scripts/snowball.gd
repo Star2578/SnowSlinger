@@ -6,14 +6,12 @@ extends Node3D
 var initPos: Vector3
 
 func _ready():
-	initPos = position
-	print(position)
+	pass
 func _process(delta):
 	if initPos.distance_to(position) > maxRange:
 		print("out of range")
 		queue_free()
 	global_translate(transform.basis.z * -speed * delta)
-
 func _on_Hit(body: Node3D):
 	if !body.is_in_group("Player"):
 		print("Hit")

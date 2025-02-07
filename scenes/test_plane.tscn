@@ -1,7 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://bnbdos8dws6x8"]
+[gd_scene load_steps=7 format=3 uid="uid://bnbdos8dws6x8"]
 
 [ext_resource type="PackedScene" uid="uid://d22080urnkn8n" path="res://entities/player.tscn" id="1_8v88p"]
-[ext_resource type="PackedScene" uid="uid://dvevfkgigl3up" path="res://entities/enemy.tscn" id="2_cuciw"]
 [ext_resource type="PackedScene" uid="uid://dostdn12q2cqy" path="res://scenes/wall.tscn" id="3_m6ptj"]
 
 [sub_resource type="Environment" id="Environment_vg1vu"]
@@ -24,10 +23,6 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2.88857, 1.92303, -6.9
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_vg1vu")
-
-[node name="Enemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_cuciw")]
-transform = Transform3D(0.72, 0, 0, 0, 0.72, 0, 0, 0, 0.72, 0.650927, 1.08827, -3.90858)
-player = NodePath("../Player")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0312777)
