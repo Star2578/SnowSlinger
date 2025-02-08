@@ -16,6 +16,7 @@ script = ExtResource("1_isadf")
 
 [node name="Pause" type="CanvasLayer" parent="."]
 layer = 2
+visible = false
 
 [node name="Control" type="Control" parent="Pause"]
 layout_mode = 3
@@ -100,3 +101,4 @@ theme_override_font_sizes/font_size = 24
 text = "Main Menu"
 
 [connection signal="value_changed" from="Pause/Control/Panel/Sens/Sensitivity" to="." method="_sensitivity_changed"]
+[connection signal="pressed" from="Pause/Control/Panel/MainMenu" to="." method="to_main_menu"]

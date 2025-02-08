@@ -1,7 +1,9 @@
-[gd_resource type="Resource" script_class="Weapon" load_steps=3 format=3 uid="uid://ddowwfdgjqss3"]
+[gd_resource type="Resource" script_class="Weapon" load_steps=5 format=3 uid="uid://ddowwfdgjqss3"]
 
 [ext_resource type="Script" path="res://Resources/WeaponResource.gd" id="1_hquup"]
+[ext_resource type="AudioStream" uid="uid://emeii3tcrcj2" path="res://audio/Hit damage 1.wav" id="1_oqdw4"]
 [ext_resource type="Texture2D" uid="uid://bpkkdfpwa0w3u" path="res://sprites/sniper.png" id="2_53flx"]
+[ext_resource type="AudioStream" uid="uid://c1kvm2cqcedvu" path="res://audio/Balloon Pop 1.wav" id="2_avkfc"]
 
 [resource]
 script = ExtResource("1_hquup")
@@ -9,7 +11,8 @@ type = 4
 automatic = false
 weapon_name = "Sniper"
 sprite = ExtResource("2_53flx")
-firing_sound = Array[AudioStream]([])
+firing_sound = Array[AudioStream]([ExtResource("1_oqdw4")])
+reload_sound = ExtResource("2_avkfc")
 damage = 100
 mag_size = 5
 spread = 0.0
@@ -19,3 +22,4 @@ bullet_speed = 80.0
 bullet_range = 60.0
 scope_mult = 2.5
 reload_time = 2.5
+knockback_strength = 10.0

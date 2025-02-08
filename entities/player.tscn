@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://d22080urnkn8n"]
+[gd_scene load_steps=24 format=3 uid="uid://d22080urnkn8n"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_dq7tu"]
 [ext_resource type="PackedScene" uid="uid://c21sqsj44jxmq" path="res://entities/snow_ball.tscn" id="2_22pw7"]
@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://b30g260gaxa7m" path="res://audio/Ducko - Waiting.wav" id="6_au50k"]
 [ext_resource type="Script" path="res://scripts/clock.gd" id="7_3w6rs"]
 [ext_resource type="FontFile" uid="uid://dtp2nbohivb28" path="res://font/Minecraft.ttf" id="7_vg5hi"]
+[ext_resource type="AudioStream" uid="uid://c57l04u2l5mi8" path="res://audio/hit.wav" id="10_5a70i"]
 
 [sub_resource type="Animation" id="Animation_qf6m2"]
 resource_name = "Equip"
@@ -276,6 +277,13 @@ label_settings = SubResource("LabelSettings_sju1n")
 mesh = SubResource("QuadMesh_0yov2")
 
 [node name="Bullet_RayCast3D" type="RayCast3D" parent="Camera3D"]
+
+[node name="HitSound" type="AudioStreamPlayer3D" parent="Camera3D"]
+stream = ExtResource("10_5a70i")
+
+[node name="FireSoundPlayer3D" type="AudioStreamPlayer3D" parent="Camera3D"]
+
+[node name="ReloadSoundPlayer3D" type="AudioStreamPlayer3D" parent="Camera3D"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_3lmoj")

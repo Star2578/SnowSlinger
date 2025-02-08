@@ -1,7 +1,9 @@
-[gd_resource type="Resource" script_class="Weapon" load_steps=3 format=3 uid="uid://bp4vxxflnqko4"]
+[gd_resource type="Resource" script_class="Weapon" load_steps=5 format=3 uid="uid://bp4vxxflnqko4"]
 
+[ext_resource type="AudioStream" uid="uid://emeii3tcrcj2" path="res://audio/Hit damage 1.wav" id="1_6pska"]
 [ext_resource type="Script" path="res://Resources/WeaponResource.gd" id="1_gx6bx"]
 [ext_resource type="Texture2D" uid="uid://bjw0lxuhawb4i" path="res://sprites/sling.png" id="2_2ldo2"]
+[ext_resource type="AudioStream" uid="uid://c1kvm2cqcedvu" path="res://audio/Balloon Pop 1.wav" id="2_spwkn"]
 
 [resource]
 script = ExtResource("1_gx6bx")
@@ -9,7 +11,8 @@ type = 1
 automatic = false
 weapon_name = "Sling Shot"
 sprite = ExtResource("2_2ldo2")
-firing_sound = Array[AudioStream]([])
+firing_sound = Array[AudioStream]([ExtResource("1_6pska")])
+reload_sound = ExtResource("2_spwkn")
 damage = 35
 mag_size = 30
 spread = 0.0
@@ -19,3 +22,4 @@ bullet_speed = 18.0
 bullet_range = 15.0
 scope_mult = 1.0
 reload_time = 1.5
+knockback_strength = 10.0

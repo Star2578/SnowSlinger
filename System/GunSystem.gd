@@ -3,6 +3,8 @@ extends Node
 @export var parent : CharacterBody3D
 @onready var weapon_cooldown: Timer = $WeaponCooldown
 @onready var melee_raycast = $"../Camera3D/Bullet_RayCast3D"  # Adjust path to RayCast3D
+@onready var fire_sound_player = $"../Camera3D/FireSoundPlayer3D"
+@onready var reload_sound_player = $"../Camera3D/ReloadSoundPlayer3D"
 				
 var current_weapon : Weapon
 var current_ammo : int
@@ -20,6 +22,10 @@ func reload():
 		
 	if parent.is_zoom:
 		toggle_zoom()
+		
+	if current_weapon.reload_sound:
+		reload_sound_player.stream = current_weapon.reload_sound
+		reload_sound_player.play()
 	
 	parent.is_reload = true
 	#parent.anim_player.speed_scale = current_weapon.reload_time/
@@ -49,6 +55,10 @@ func shoot():
 	else:
 		if not parent.snowball_scene:
 			return
+		
+		if current_weapon.firing_sound.size() > 0:
+			fire_sound_player.stream = current_weapon.firing_sound.pick_random()
+			fire_sound_player.play()
 		
 		# cooldown by firerate (bullet/sec)
 		parent.can_shoot = false

@@ -8,6 +8,7 @@ extends CharacterBody3D
 @export var health: float = 200
 
 @onready var hand: Sprite2D = $Camera3D/CanvasLayer/Control/Hand
+@onready var camera_shake_timer = Timer.new()
 
 var camera: Camera3D
 var gravity: float = ProjectSettings.get("physics/3d/default_gravity")
@@ -43,6 +44,8 @@ func _ready():
 	anim_player = $Camera3D/CanvasLayer/Control/Hand/AnimationPlayer
 	hand.texture = current_weapon.sprite
 	camera = $Camera3D
+	add_child(camera_shake_timer)
+	camera_shake_timer.one_shot = true  
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _input(event):
@@ -153,6 +156,8 @@ func heal(amount: float):
 func take_damage(amount: float):
 	print("Took ", amount, " dmg")
 	health = max(0, health - amount)
+	camera_shake(0.2, 5.0)
+	$Camera3D/HitSound.play()
 	if health <= 0:
 		print("GAME OVER!")
 		GameManager.on_gameover()
@@ -162,6 +167,22 @@ func cycle_weapon(direction: int):
 	current_weapon = weapon_slots[current_slot_index]
 	$GunSystem.perform_swap_action(current_weapon)
 	hand.texture = current_weapon.sprite  # Update UI weapon sprite
+
+func camera_shake(duration: float, intensity: float):
+	camera_shake_timer.wait_time = duration
+	camera_shake_timer.start()
+	camera_shake_timer.timeout.connect(stop_camera_shake)
+
+	var shake_amount = intensity * 0.01
+	var tween = get_tree().create_tween()
+	
+	tween.tween_property(camera, "rotation_degrees:x", camera.rotation_degrees.x + randf_range(-shake_amount, shake_amount), 0.05)
+	tween.tween_property(camera, "rotation_degrees:y", camera.rotation_degrees.y + randf_range(-shake_amount, shake_amount), 0.05)
+
+func stop_camera_shake():
+	var tween = get_tree().create_tween()
+	tween.tween_property(camera, "rotation_degrees:x", 0, 0.1)
+	tween.tween_property(camera, "rotation_degrees:y", 0, 0.1)
 
 func hotbar_swapto(n : int):
 	if n == 1:

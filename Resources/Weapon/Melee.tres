@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="Weapon" load_steps=3 format=3 uid="uid://cn8dsixa2xm1p"]
+[gd_resource type="Resource" script_class="Weapon" load_steps=4 format=3 uid="uid://cn8dsixa2xm1p"]
 
 [ext_resource type="Script" path="res://Resources/WeaponResource.gd" id="1_g6mf1"]
+[ext_resource type="AudioStream" uid="uid://emeii3tcrcj2" path="res://audio/Hit damage 1.wav" id="1_uli6o"]
 [ext_resource type="Texture2D" uid="uid://bpdakbfqykm01" path="res://sprites/punch.png" id="2_1jpul"]
 
 [resource]
@@ -9,7 +10,7 @@ type = 0
 automatic = true
 weapon_name = "Fist"
 sprite = ExtResource("2_1jpul")
-firing_sound = Array[AudioStream]([])
+firing_sound = Array[AudioStream]([ExtResource("1_uli6o")])
 damage = 35
 mag_size = 0
 spread = 0.0
@@ -19,3 +20,4 @@ bullet_speed = 0.0
 bullet_range = 3.0
 scope_mult = 1.0
 reload_time = 1.0
+knockback_strength = 10.0
