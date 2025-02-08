@@ -18,3 +18,4 @@ bullet_speed = 15.0
 bullet_range = 3.0
 scope_mult = 1.0
 reload_time = 3.0
+knockback_strength = 2.0

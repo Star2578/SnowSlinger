@@ -30,3 +30,4 @@ enum WeaponType {
 @export var bullet_range:float
 @export var scope_mult: float = 1
 @export var reload_time: float = 1
+@export var knockback_strength: float = 10
