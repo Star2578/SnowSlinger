@@ -9,7 +9,7 @@ func _on_restart_pressed() -> void:
 	GameManager.is_start = true
 	get_tree().paused = false
 	get_tree().reload_current_scene()
-	
+	GameManager.init_timer()
 func _on_back_to_menu_pressed() -> void:
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
