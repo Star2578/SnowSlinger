@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=3 format=3 uid="uid://ddowwfdgjqss3"]
+
+[ext_resource type="Script" path="res://Resources/WeaponResource.gd" id="1_hquup"]
+[ext_resource type="Texture2D" uid="uid://bpkkdfpwa0w3u" path="res://sprites/sniper.png" id="2_53flx"]
+
+[resource]
+script = ExtResource("1_hquup")
+type = 4
+automatic = false
+sprite = ExtResource("2_53flx")
+firing_sound = Array[AudioStream]([])
+damage = 20
+mag_size = 10
+spread = 0.0
+bullet_amount = 1
+fire_rate = 0.75
+bullet_speed = 80.0
+bullet_range = 60.0
+scope_mult = 2.5
+reload_time = 2.5

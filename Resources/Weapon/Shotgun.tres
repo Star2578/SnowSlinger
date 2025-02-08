@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=3 format=3 uid="uid://dbbc2rtypfylr"]
+
+[ext_resource type="Script" path="res://Resources/WeaponResource.gd" id="1_rvbqv"]
+[ext_resource type="Texture2D" uid="uid://cp26kpc7p1x4s" path="res://sprites/shotgun.png" id="2_hik73"]
+
+[resource]
+script = ExtResource("1_rvbqv")
+type = 3
+automatic = false
+sprite = ExtResource("2_hik73")
+firing_sound = Array[AudioStream]([])
+damage = 2
+mag_size = 10
+spread = 0.6
+bullet_amount = 25
+fire_rate = 1.25
+bullet_speed = 15.0
+bullet_range = 2.0
+scope_mult = 1.0
+reload_time = 3.0

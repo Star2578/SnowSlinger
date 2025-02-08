@@ -1,20 +1,29 @@
 extends Node3D
 
-@export var speed: float = 15.0
-@export var maxRange: float = 10 # Max range snowball can travel
+@export var speed: float = 18.0
+@export var maxRange: float = 20 # Max range snowball can travel
 
 var initPos: Vector3
+var gravity: float = ProjectSettings.get("physics/3d/default_gravity")
+var vy:float = 0.0
+var fade_fx: Tween
+var damage
 
 func _ready():
-	initPos = position
-	print(position)
+	pass
 func _process(delta):
+	vy += gravity * delta
 	if initPos.distance_to(position) > maxRange:
-		print("out of range")
-		queue_free()
+		pass
+		fade_fx = get_tree().create_tween()
+		fade_fx.tween_property($Sprite3D, "modulate:a", 0, 0.04)
+	
 	global_translate(transform.basis.z * -speed * delta)
-
+	global_translate(transform.basis.y * -vy * delta)
 func _on_Hit(body: Node3D):
 	if !body.is_in_group("Player"):
-		print("Hit")
+		if body.is_in_group("Enemy"):
+			body.take_damage(damage)
+		if fade_fx != null:
+			fade_fx.kill()
 		queue_free()

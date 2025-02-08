@@ -182,6 +182,8 @@ horizontal_alignment = 2
 [node name="Fog" type="MeshInstance3D" parent="Camera3D"]
 mesh = SubResource("QuadMesh_0yov2")
 
+[node name="Bullet_RayCast3D" type="RayCast3D" parent="Camera3D"]
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_3lmoj")
 

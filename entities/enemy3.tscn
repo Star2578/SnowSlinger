@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://2rvlxv3xfbve"]
+
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_0hgoo"]
+[ext_resource type="Texture2D" uid="uid://b4xs6fcae7rep" path="res://sprites/alien_2.png" id="2_ciy6s"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ao5pi"]
+
+[node name="Enemy" type="CharacterBody3D" groups=["Enemy"]]
+transform = Transform3D(0.72, 0, 0, 0, 0.72, 0, 0, 0, 0.72, 0, 0, 0)
+script = ExtResource("1_0hgoo")
+sprite = ExtResource("2_ciy6s")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_ao5pi")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
+cast_shadow = 0
+billboard = 1
+render_priority = 1
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="AttackInterval" type="Timer" parent="."]
