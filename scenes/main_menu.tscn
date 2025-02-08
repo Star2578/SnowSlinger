@@ -32,8 +32,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_adlss")
-weapons = Array[ExtResource("2_qgo45")]([ExtResource("3_qbhmm"), ExtResource("4_bww8u"), ExtResource("5_n4wn2")])
-sprites = Array[Texture2D]([ExtResource("6_rte2m"), ExtResource("7_tcmio"), ExtResource("8_c75ev")])
+weapons = Array[ExtResource("2_qgo45")]([ExtResource("4_bww8u"), ExtResource("3_qbhmm"), ExtResource("5_n4wn2")])
+sprites = Array[Texture2D]([ExtResource("7_tcmio"), ExtResource("6_rte2m"), ExtResource("8_c75ev")])
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1

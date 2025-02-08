@@ -6,6 +6,7 @@ extends Control
 var index = 0
 
 func _ready():
+	update_weapon_display()
 	$Buttons/Start.grab_focus()
 
 func _input(event):

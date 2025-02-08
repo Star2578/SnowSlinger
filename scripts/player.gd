@@ -41,6 +41,7 @@ func _ready():
 	slot1 = GameManager.weapon_pri
 	current_weapon = slot1
 	weapon_slots = [slot1, slot2]
+	current_ammo = current_weapon.mag_size
 	anim_player = $Camera3D/CanvasLayer/Control/Hand/AnimationPlayer
 	hand.texture = current_weapon.sprite
 	camera = $Camera3D
@@ -156,7 +157,6 @@ func heal(amount: float):
 func take_damage(amount: float):
 	print("Took ", amount, " dmg")
 	health = max(0, health - amount)
-	camera_shake(0.2, 5.0)
 	$Camera3D/HitSound.play()
 	if health <= 0:
 		print("GAME OVER!")
@@ -167,22 +167,6 @@ func cycle_weapon(direction: int):
 	current_weapon = weapon_slots[current_slot_index]
 	$GunSystem.perform_swap_action(current_weapon)
 	hand.texture = current_weapon.sprite  # Update UI weapon sprite
-
-func camera_shake(duration: float, intensity: float):
-	camera_shake_timer.wait_time = duration
-	camera_shake_timer.start()
-	camera_shake_timer.timeout.connect(stop_camera_shake)
-
-	var shake_amount = intensity * 0.01
-	var tween = get_tree().create_tween()
-	
-	tween.tween_property(camera, "rotation_degrees:x", camera.rotation_degrees.x + randf_range(-shake_amount, shake_amount), 0.05)
-	tween.tween_property(camera, "rotation_degrees:y", camera.rotation_degrees.y + randf_range(-shake_amount, shake_amount), 0.05)
-
-func stop_camera_shake():
-	var tween = get_tree().create_tween()
-	tween.tween_property(camera, "rotation_degrees:x", 0, 0.1)
-	tween.tween_property(camera, "rotation_degrees:y", 0, 0.1)
 
 func hotbar_swapto(n : int):
 	if n == 1:
