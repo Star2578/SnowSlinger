@@ -1,0 +1,112 @@
+[gd_scene load_steps=4 format=3 uid="uid://paipxtg8hx3a"]
+
+[ext_resource type="Script" path="res://scripts/gameover.gd" id="1_1730m"]
+[ext_resource type="FontFile" uid="uid://dtp2nbohivb28" path="res://font/Minecraft.ttf" id="1_n5tm6"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1chr7"]
+font = ExtResource("1_n5tm6")
+font_size = 72
+
+[node name="Gameover" type="CanvasLayer"]
+process_mode = 3
+layer = 19
+script = ExtResource("1_1730m")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="G" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -227.266
+offset_top = -110.0
+offset_right = 209.734
+offset_bottom = -38.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 0.0518899
+text = "G"
+label_settings = SubResource("LabelSettings_1chr7")
+
+[node name="AM" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -166.266
+offset_top = -123.0
+offset_right = 270.734
+offset_bottom = -51.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Am"
+label_settings = SubResource("LabelSettings_1chr7")
+
+[node name="E O" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.2656
+offset_top = -98.0
+offset_right = 396.734
+offset_bottom = -26.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 0.048767
+text = "E o"
+label_settings = SubResource("LabelSettings_1chr7")
+
+[node name="VER" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 77.7344
+offset_top = -102.0
+offset_right = 514.734
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 0.0831926
+text = "Ver"
+label_settings = SubResource("LabelSettings_1chr7")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="restart" type="Button" parent="Control"]
+custom_minimum_size = Vector2(160, 0)
+offset_left = 382.0
+offset_top = 438.0
+offset_right = 542.0
+offset_bottom = 486.0
+theme_override_fonts/font = ExtResource("1_n5tm6")
+theme_override_font_sizes/font_size = 40
+text = "restart"
+
+[node name="back_to_menu" type="Button" parent="Control"]
+offset_left = 596.0
+offset_top = 438.0
+offset_right = 756.0
+offset_bottom = 486.0
+theme_override_fonts/font = ExtResource("1_n5tm6")
+theme_override_font_sizes/font_size = 40
+text = "menu"
+
+[connection signal="pressed" from="Control/restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="Control/back_to_menu" to="." method="_on_back_to_menu_pressed"]

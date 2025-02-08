@@ -58,6 +58,7 @@ func shoot():
 		parent.anim_player.play("shoot")
 		
 		if current_weapon.type != Weapon.WeaponType.MELEE:
+			GameManager.ammo_used += 1
 			parent.current_ammo = max(0,parent.current_ammo - 1)
 		
 		match current_weapon.type:

@@ -24,7 +24,7 @@ func _physics_process(delta):
 			player.take_damage(cold_damage)  # Call player's damage function
 			time_away = 0  # Reset timer after applying damage
 
-		print("COLD: ", time_away, "s")
+		#print("COLD: ", time_away, "s")
 	
 	else:
 		player.is_cold = false;
@@ -35,4 +35,4 @@ func _physics_process(delta):
 			player.heal(heal_amount)  # Call player's heal function
 			time_near = 0  # Reset timer after healing
 
-		print("WARM: ", time_near, "s")
+		#print("WARM: ", time_near, "s")

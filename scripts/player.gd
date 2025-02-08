@@ -62,6 +62,8 @@ func _input(event):
 				
 		if event.keycode == KEY_Y:
 			print(current_ammo,"/",stored_ammo)
+		if event.keycode == KEY_H:
+			GameManager.on_win()
 		if event.keycode == KEY_O:
 			# show cursor
 			if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
@@ -136,6 +138,7 @@ func take_damage(amount: float):
 	health = max(0, health - amount)
 	if health <= 0:
 		print("GAME OVER!")
+		GameManager.on_gameover()
 
 func hotbar_swapto(n : int):
 	if n == 1:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://d22080urnkn8n"]
+[gd_scene load_steps=22 format=3 uid="uid://d22080urnkn8n"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_dq7tu"]
 [ext_resource type="PackedScene" uid="uid://c21sqsj44jxmq" path="res://entities/snow_ball.tscn" id="2_22pw7"]
@@ -8,6 +8,7 @@
 [ext_resource type="Shader" path="res://shader/fog.gdshader" id="5_l1dlv"]
 [ext_resource type="Texture2D" uid="uid://3oueg2iecshm" path="res://sprites/item_snow_ammo.png" id="6_3rh5d"]
 [ext_resource type="AudioStream" uid="uid://b30g260gaxa7m" path="res://audio/Ducko - Waiting.wav" id="6_au50k"]
+[ext_resource type="FontFile" uid="uid://dtp2nbohivb28" path="res://font/Minecraft.ttf" id="7_vg5hi"]
 
 [sub_resource type="Animation" id="Animation_qf6m2"]
 resource_name = "Equip"
@@ -99,6 +100,10 @@ font_color = Color(0, 0, 0, 1)
 [sub_resource type="LabelSettings" id="LabelSettings_13gtt"]
 font_size = 42
 font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_sju1n"]
+font = ExtResource("7_vg5hi")
+font_size = 40
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nfl7w"]
 render_priority = 0
@@ -243,6 +248,24 @@ grow_horizontal = 0
 grow_vertical = 0
 text = "10/90"
 label_settings = SubResource("LabelSettings_13gtt")
+
+[node name="Clock" type="Control" parent="Camera3D/CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+
+[node name="Label" type="Label" parent="Camera3D/CanvasLayer/Control/Clock"]
+layout_mode = 0
+offset_left = -130.0
+offset_top = 43.0
+offset_right = -30.0
+offset_bottom = 83.0
+text = "00:00"
+label_settings = SubResource("LabelSettings_sju1n")
 
 [node name="Fog" type="MeshInstance3D" parent="Camera3D"]
 mesh = SubResource("QuadMesh_0yov2")

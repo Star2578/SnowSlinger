@@ -70,6 +70,7 @@ func ondeath():
 	
 	await dtween.finished
 	
+	GameManager.kill_count += 1
 	drop_item()
 	queue_free()
 
