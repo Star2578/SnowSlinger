@@ -2,13 +2,15 @@ extends CharacterBody3D
 
 @export var mouse_sensitivity: float = 0.1
 @export var speed: float = 4.0
-@export var floating_penalty : float = 1
+@export var floating_penalty : float = 0.8
 @export var jump_velocity: float = 4.5
 @export var snowball_scene: PackedScene
+@export var health: int = 200
+
+@onready var hand: Sprite2D = $Camera3D/CanvasLayer/Control/Hand
 
 var camera: Camera3D
 var gravity: float = ProjectSettings.get("physics/3d/default_gravity")
-
 var anim_player: AnimationPlayer
 
 #===============[player weapon]===================
@@ -18,8 +20,10 @@ const SLINGSHOT = preload("res://Resources/Weapon/Slingshot.tres")
 const SNIPER = preload("res://Resources/Weapon/Sniper.tres")
 const SUB_SNOWGUN = preload("res://Resources/Weapon/SubSnowgun.tres")
 
-var current_weapon: Weapon = SLINGSHOT
-var current_slot : int = 1
+var slot1 : Weapon = SHOTGUN
+var slot2 : Weapon = MELEE
+var current_weapon: Weapon = slot1
+
 var stored_ammo : int = 90
 var current_ammo : int = current_weapon.mag_size
 var can_shoot : bool = true
@@ -31,6 +35,7 @@ var is_equip : bool = false
 
 func _ready():
 	anim_player = $Camera3D/CanvasLayer/Control/Hand/AnimationPlayer
+	hand.texture = current_weapon.sprite
 	camera = $Camera3D
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
@@ -105,8 +110,8 @@ func _loop_bgm():
 
 func hotbar_swapto(n : int):
 	if n == 1:
-		$GunSystem.perform_swap_action(SLINGSHOT)
+		$GunSystem.perform_swap_action(slot1)
 	elif n == 2:
 		pass
 	elif n == 3:
-		$GunSystem.perform_swap_action(MELEE)
+		$GunSystem.perform_swap_action(slot2)

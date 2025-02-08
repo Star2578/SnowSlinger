@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://bnbdos8dws6x8"]
+[gd_scene load_steps=8 format=3 uid="uid://bnbdos8dws6x8"]
 
 [ext_resource type="PackedScene" uid="uid://d22080urnkn8n" path="res://entities/player.tscn" id="1_8v88p"]
+[ext_resource type="PackedScene" uid="uid://dvevfkgigl3up" path="res://entities/enemy1.tscn" id="2_gbjie"]
 [ext_resource type="PackedScene" uid="uid://dostdn12q2cqy" path="res://scenes/wall.tscn" id="3_m6ptj"]
 
 [sub_resource type="Environment" id="Environment_vg1vu"]
@@ -20,6 +21,9 @@ polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(2, 0, 3), PackedInt32Arr
 
 [node name="Player" parent="." instance=ExtResource("1_8v88p")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2.88857, 1.92303, -6.99717)
+
+[node name="Enemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_gbjie")]
+player = NodePath("../Player")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_vg1vu")

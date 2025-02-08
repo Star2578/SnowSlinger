@@ -1,22 +1,59 @@
 extends CharacterBody3D
 
 @export var player: Node3D
+@export var sprite: Texture2D
 @export var speed: float = 3.0
 @export var accel: float = 5.0
-@export var sprite: Texture2D
 @export var health: float = 100
+@export var attack_speed:float = 0.5
+@export var damage: int = 2
 
 @onready var navigation_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var sprite3d: Sprite3D = $Sprite3D
+@onready var attack_interval: Timer = $AttackInterval
+
+var can_attack : bool = true
 
 func _ready():
 	sprite3d.texture = sprite
+	set_physics_process(false)
+	await get_tree().physics_frame
+	set_physics_process(true)
 
 func _physics_process(delta):
-	navigation_agent.target_position = player.global_transform.origin
-	var next_position = navigation_agent.get_next_path_position()
-	
-	var direction = (next_position - global_transform.origin).normalized()
-	velocity = velocity.lerp(direction * speed, accel * delta)
+	if health > 0:
+				
+		navigation_agent.target_position = player.global_transform.origin
+		var next_position = navigation_agent.get_next_path_position()
+		
+		if player.global_transform.origin.distance_to(next_position) < 0.01:
+			attack(player)
+			
+		var direction = (next_position - global_transform.origin).normalized()
+		velocity = velocity.lerp(direction * speed, accel * delta)
+		
+		move_and_slide()
 
-	move_and_slide()
+func attack(player):
+	if not can_attack:
+		return
+	can_attack = false
+	
+	player.health = max(0 ,player.health - damage)
+	print(self.name)
+	attack_interval.start(1/attack_speed)
+	attack_interval.timeout.connect(func (): can_attack = true )
+
+func take_damage(damage):
+	health = max(0,health - damage)
+	if health <= 0:
+		ondeath()
+	print("Hp : " , health)
+
+func ondeath():
+	$Sprite3D.modulate = "#e80027"
+	var dtween = get_tree().create_tween()
+	dtween.tween_property($Sprite3D, "modulate:a", 0, 0.5)
+	
+	await dtween.finished
+	queue_free()

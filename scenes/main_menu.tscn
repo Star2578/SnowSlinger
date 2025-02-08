@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cbnm33erqvut"]
+[gd_scene load_steps=6 format=3 uid="uid://wgog8o0yf0nq"]
 
 [ext_resource type="Texture2D" uid="uid://bg1k2fmbdyslb" path="res://sprites/snowball.png" id="1_7dg8s"]
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_adlss"]

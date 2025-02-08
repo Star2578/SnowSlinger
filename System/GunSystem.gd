@@ -56,7 +56,8 @@ func shoot():
 		
 		parent.anim_player.play("shoot")
 		
-		parent.current_ammo = max(0,parent.current_ammo - 1)
+		if current_weapon.type != Weapon.WeaponType.MELEE:
+			parent.current_ammo = max(0,parent.current_ammo - 1)
 		
 		match current_weapon.type:
 			Weapon.WeaponType.MELEE:
@@ -66,67 +67,55 @@ func shoot():
 				var collision_point = melee_raycast.get_collision_point()
 				var collision_normal = melee_raycast.get_collision_normal()
 				#If the bullet hit an object, get it's data
-				if hit_target != null: 
-					var valid_bullet : Dictionary = {
-						"hit_target" : hit_target,
-							"collision_point" : collision_point,
-						"collision_normal" : collision_normal,
-					}
-					print("HIT: ", valid_bullet)
+				if hit_target != null and hit_target.is_in_group("Enemy"):
+					hit_target.take_damage(current_weapon.damage)
+					print("Target hit (melee)")
 			
 			Weapon.WeaponType.SHOTGUN:
 				for n in current_weapon.bullet_amount:
-					var snowball = parent.snowball_scene.instantiate()
-					parent.get_parent().add_child(snowball)
-					# Set position to player's gun or camera
-					#snowball.position = parent.position
-					snowball.speed = current_weapon.bullet_speed
-					snowball.maxRange = current_weapon.bullet_range
-					snowball.global_transform = $"../Camera3D".global_transform
-					
-					var cam_gb_transform = $"../Camera3D".global_transform
-					
-					# bullet spread
-					var rng = RandomNumberGenerator.new()
-					var xrand = rng.randf_range(-current_weapon.spread, current_weapon.spread)
-					var yrand = rng.randf_range(-current_weapon.spread, current_weapon.spread)	
-					#var xdegrand = rng.randf_range(-current_weapon.spread, current_weapon.spread)
-					#var ydegrand = rng.randf_range(-current_weapon.spread, current_weapon.spread)
-
-					var xdegrand
-					var ydegrand
-					if min(xrand , 0) == xrand:
-						xdegrand = rng.randf_range(-current_weapon.spread, 0)
-					else:
-						xdegrand = rng.randf_range(0, current_weapon.spread)
-					if min(yrand , 0) == xrand:
-						ydegrand = rng.randf_range(-current_weapon.spread, 0)
-					else:
-						ydegrand = rng.randf_range(0, current_weapon.spread)
-					
-					
-						
-					var spreadx = ( cam_gb_transform.basis.x * xrand)
-					var spready = ( cam_gb_transform.basis.y * yrand)
-					
-					snowball.initPos = $"../Camera3D".global_position
-					snowball.global_transform.origin = 	 cam_gb_transform.origin + ( - cam_gb_transform.basis.z * 0.5) + spreadx + spready
-					snowball.global_transform.basis = snowball.global_transform.basis.rotated(cam_gb_transform.basis.y,PI/6 * xdegrand)
-					snowball.global_transform.basis = snowball.global_transform.basis.rotated(cam_gb_transform.basis.x,PI/6 * ydegrand)
-			
+					initialize_snowball(current_weapon)
 			_:
 				#every other [single projectile gun]
-				var snowball = parent.snowball_scene.instantiate()
-				parent.get_parent().add_child(snowball)
-				# Set position to player's gun or camera
-				#snowball.position = parent.position
-				snowball.speed = current_weapon.bullet_speed
-				snowball.global_transform = $"../Camera3D".global_transform
-				# give some distance between camara
-				snowball.initPos = $"../Camera3D".global_position
-				snowball.global_transform.origin = 	 $"../Camera3D".global_transform.origin + ( - $"../Camera3D".global_transform.basis.z * 0.5)
+				initialize_snowball(current_weapon)
+
+func initialize_snowball(weapon:Weapon):
+	var snowball = parent.snowball_scene.instantiate()
+	parent.get_parent().add_child(snowball)
+	# Set position to player's gun or camera
+	var cam_gb_transform = $"../Camera3D".global_transform
+	
+	snowball.initPos = $"../Camera3D".global_position
+	snowball.global_transform.origin = snowball.global_transform.origin + ( - cam_gb_transform.basis.z * 0.5) #spawn infront of player
+	snowball.speed = weapon.bullet_speed
+	snowball.maxRange = weapon.bullet_range
+	snowball.global_transform = cam_gb_transform
+	snowball.damage = weapon.damage
+	
+	if weapon.spread > 0:
+		# bullet spread
+		var rng = RandomNumberGenerator.new()
+		var xrand = rng.randf_range(-weapon.spread, weapon.spread)
+		var yrand = rng.randf_range(-weapon.spread, weapon.spread)
+		var xdegrand
+		var ydegrand
 		
+		if min(xrand , 0) == xrand:
+			xdegrand = rng.randf_range(-weapon.spread, 0)
+		else:
+			xdegrand = rng.randf_range(0, weapon.spread)
+		if min(yrand , 0) == xrand:
+			ydegrand = rng.randf_range(-weapon.spread, 0)
+		else:
+			ydegrand = rng.randf_range(0, weapon.spread)
+		var spreadx = ( cam_gb_transform.basis.x * xrand)
+		var spready = ( cam_gb_transform.basis.y * yrand)
 		
+		#snowball.global_transform.origin = 	 cam_gb_transform.origin + ( - cam_gb_transform.basis.z * 0.5) + spreadx + spready
+		snowball.global_transform.origin += spreadx + spready
+		snowball.global_transform.basis = snowball.global_transform.basis.rotated(cam_gb_transform.basis.y,PI/6 * xdegrand)
+		snowball.global_transform.basis = snowball.global_transform.basis.rotated(cam_gb_transform.basis.x,PI/6 * ydegrand)
+	return snowball
+	
 func perform_swap_action(new_weapon:Weapon , from_floor:bool = false):
 	if parent.current_weapon.type == new_weapon.type and not from_floor: 
 		return
@@ -147,7 +136,7 @@ func perform_swap_action(new_weapon:Weapon , from_floor:bool = false):
 	
 	parent.anim_player.play("Equip")
 	
-	if (new_weapon.type != Weapon.WeaponType.MELEE) or (parent.current_weapon.type != Weapon.WeaponType.MELEE):
+	if from_floor:
 		parent.current_ammo = 0 #reset ammo on pick up new gun
 	
 	#change weapon & sprite

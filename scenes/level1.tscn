@@ -1,10 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://m1hhi2d72nih"]
+[gd_scene load_steps=16 format=3 uid="uid://m1hhi2d72nih"]
 
 [ext_resource type="PackedScene" uid="uid://d22080urnkn8n" path="res://entities/player.tscn" id="1_477sc"]
 [ext_resource type="PackedScene" uid="uid://ducamiudxh34i" path="res://models/tree.tscn" id="2_7fkk5"]
 [ext_resource type="PackedScene" uid="uid://dostdn12q2cqy" path="res://scenes/wall.tscn" id="3_ybyso"]
 [ext_resource type="PackedScene" uid="uid://d1ju14bharin4" path="res://models/item.tscn" id="4_66mnd"]
 [ext_resource type="Resource" uid="uid://iairatkv68xi" path="res://items/ammo/ammo.tres" id="5_hxmka"]
+[ext_resource type="PackedScene" uid="uid://dvevfkgigl3up" path="res://entities/enemy1.tscn" id="6_nl6rv"]
+[ext_resource type="PackedScene" uid="uid://cva3hk28usg48" path="res://entities/enemy2.tscn" id="7_q4wyu"]
+[ext_resource type="PackedScene" uid="uid://2rvlxv3xfbve" path="res://entities/enemy3.tscn" id="8_uc838"]
 
 [sub_resource type="Environment" id="Environment_ih4fx"]
 background_mode = 1
@@ -137,3 +140,14 @@ mesh = null
 [node name="Ammo" parent="." instance=ExtResource("4_66mnd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0681, 0.962901, 9.39904)
 item = ExtResource("5_hxmka")
+
+[node name="Enemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_nl6rv")]
+player = NodePath("../Player")
+
+[node name="Enemy2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("7_q4wyu")]
+transform = Transform3D(0.72, 0, 0, 0, 0.72, 0, 0, 0, 0.72, 7.96266, 1.16145, 1.1308)
+player = NodePath("../Player")
+
+[node name="Enemy3" parent="." node_paths=PackedStringArray("player") instance=ExtResource("8_uc838")]
+transform = Transform3D(0.72, 0, 0, 0, 0.72, 0, 0, 0, 0.72, -4.65355, 4.50956, -13.8848)
+player = NodePath("../Player")
