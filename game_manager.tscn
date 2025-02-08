@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://bfn750ftkefcu"]
+[gd_scene load_steps=5 format=3 uid="uid://bfn750ftkefcu"]
 
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_isadf"]
+[ext_resource type="FontFile" uid="uid://dtp2nbohivb28" path="res://font/Minecraft.ttf" id="2_2gych"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2pse2"]
+font = ExtResource("2_2gych")
 font_size = 42
 
 [sub_resource type="LabelSettings" id="LabelSettings_v5e1a"]
@@ -14,7 +16,6 @@ script = ExtResource("1_isadf")
 
 [node name="Pause" type="CanvasLayer" parent="."]
 layer = 2
-visible = false
 
 [node name="Control" type="Control" parent="Pause"]
 layout_mode = 3
@@ -80,5 +81,22 @@ scale = Vector2(2, 2)
 min_value = -1.0
 max_value = 2.0
 step = 0.01
+
+[node name="MainMenu" type="Button" parent="Pause/Control/Panel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -62.0
+offset_top = -262.0
+offset_right = 63.0
+offset_bottom = -230.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_2gych")
+theme_override_font_sizes/font_size = 24
+text = "Main Menu"
 
 [connection signal="value_changed" from="Pause/Control/Panel/Sens/Sensitivity" to="." method="_sensitivity_changed"]

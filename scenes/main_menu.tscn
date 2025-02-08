@@ -1,9 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://wgog8o0yf0nq"]
+[gd_scene load_steps=15 format=3 uid="uid://wgog8o0yf0nq"]
 
 [ext_resource type="Texture2D" uid="uid://bg1k2fmbdyslb" path="res://sprites/snowball.png" id="1_7dg8s"]
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_adlss"]
+[ext_resource type="Script" path="res://Resources/WeaponResource.gd" id="2_qgo45"]
 [ext_resource type="Texture2D" uid="uid://b4alpjjfoyvah" path="res://sprites/title.png" id="2_wajw2"]
+[ext_resource type="FontFile" uid="uid://dtp2nbohivb28" path="res://font/Minecraft.ttf" id="3_aoll1"]
+[ext_resource type="Resource" uid="uid://dbbc2rtypfylr" path="res://Resources/Weapon/Shotgun.tres" id="3_qbhmm"]
 [ext_resource type="AudioStream" uid="uid://boke6doviuldk" path="res://audio/Ducko - Continuation.wav" id="4_2d56b"]
+[ext_resource type="Resource" uid="uid://bp4vxxflnqko4" path="res://Resources/Weapon/Slingshot.tres" id="4_bww8u"]
+[ext_resource type="Resource" uid="uid://ddowwfdgjqss3" path="res://Resources/Weapon/Sniper.tres" id="5_n4wn2"]
+[ext_resource type="Texture2D" uid="uid://cid3lbjj7fs1k" path="res://sprites/item_shotgun.png" id="6_rte2m"]
+[ext_resource type="Texture2D" uid="uid://caiik2jte661m" path="res://sprites/item_sling.png" id="7_tcmio"]
+[ext_resource type="Texture2D" uid="uid://dhrg2cgbsdsnt" path="res://sprites/item_sniper.png" id="8_c75ev"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8brhp"]
 particle_flag_disable_z = true
@@ -13,6 +21,9 @@ emission_box_extents = Vector3(1, 1, 1)
 gravity = Vector3(0, 50, 0)
 scale_min = 0.3
 
+[sub_resource type="LabelSettings" id="LabelSettings_4r7gk"]
+font = ExtResource("3_aoll1")
+
 [node name="MainMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -21,6 +32,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_adlss")
+weapons = Array[ExtResource("2_qgo45")]([ExtResource("3_qbhmm"), ExtResource("4_bww8u"), ExtResource("5_n4wn2")])
+sprites = Array[Texture2D]([ExtResource("6_rte2m"), ExtResource("7_tcmio"), ExtResource("8_c75ev")])
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -59,6 +72,7 @@ offset_top = -21.0
 offset_right = 128.0
 offset_bottom = 21.0
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_aoll1")
 theme_override_font_sizes/font_size = 24
 text = "Start"
 alignment = 0
@@ -72,6 +86,7 @@ offset_top = 48.0
 offset_right = 128.0
 offset_bottom = 90.0
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_aoll1")
 theme_override_font_sizes/font_size = 24
 text = "Quit"
 alignment = 0
@@ -91,6 +106,70 @@ stream = ExtResource("4_2d56b")
 volume_db = 4.0
 autoplay = true
 
+[node name="ColorRect2" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 815.0
+offset_top = 467.0
+offset_right = 965.0
+offset_bottom = 531.0
+scale = Vector2(1.5, 1.5)
+
+[node name="Display" type="TextureRect" parent="ColorRect2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -32.0
+offset_right = 64.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_rte2m")
+
+[node name=">" type="Button" parent="ColorRect2/Display"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 14.0
+offset_top = -12.0
+offset_right = 29.0
+offset_bottom = 12.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_aoll1")
+text = ">"
+
+[node name="<" type="Button" parent="ColorRect2/Display"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -30.6667
+offset_top = -12.0
+offset_right = -15.6667
+offset_bottom = 12.0
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_aoll1")
+text = "<"
+
+[node name="Label" type="Label" parent="ColorRect2/Display"]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 75.3333
+offset_right = 88.0
+offset_bottom = 98.3333
+text = "Shotgun
+"
+label_settings = SubResource("LabelSettings_4r7gk")
+
 [connection signal="pressed" from="Buttons/Start" to="." method="_on_start"]
 [connection signal="pressed" from="Buttons/Quit" to="." method="_on_quit"]
 [connection signal="finished" from="AudioStreamPlayer2D" to="." method="_loop_bgm"]
+[connection signal="pressed" from="ColorRect2/Display/>" to="." method="_press_next"]
+[connection signal="pressed" from="ColorRect2/Display/<" to="." method="_press_prev"]

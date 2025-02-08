@@ -6,6 +6,7 @@ var is_start: bool = false
 var mouse_sensitivity: float = 0.1
 var kill_count:int
 var ammo_used:int
+var weapon_pri: Weapon
 
 var win_scene = preload("res://scenes/win.tscn")
 var gameover_scene = preload("res://scenes/gameover.tscn")
@@ -48,6 +49,11 @@ func on_win():
 	
 func start_timer():
 	var timer = get_tree().get_first_node_in_group("GameTimer")
+
+func to_main_menu():
+	is_start = false
+	get_tree().paused = false
+	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 
 func _sensitivity_changed(value: float):
 	mouse_sensitivity = value

@@ -9,6 +9,11 @@
 transform = Transform3D(0.72, 0, 0, 0, 0.72, 0, 0, 0, 0.72, 0, 0, 0)
 script = ExtResource("1_vd1to")
 sprite = ExtResource("3_8xqqi")
+speed = 5.0
+accel = 6.0
+health = 70.0
+attack_speed = 0.25
+damage = 10
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_ao5pi")
