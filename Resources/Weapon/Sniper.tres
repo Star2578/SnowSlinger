@@ -9,7 +9,7 @@
 script = ExtResource("1_hquup")
 type = 4
 automatic = false
-weapon_name = "Sniper"
+weapon_name = ""
 sprite = ExtResource("2_53flx")
 firing_sound = Array[AudioStream]([ExtResource("1_oqdw4")])
 reload_sound = ExtResource("2_avkfc")

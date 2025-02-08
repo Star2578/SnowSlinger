@@ -9,7 +9,7 @@
 script = ExtResource("1_gx6bx")
 type = 1
 automatic = false
-weapon_name = "Sling Shot"
+weapon_name = ""
 sprite = ExtResource("2_2ldo2")
 firing_sound = Array[AudioStream]([ExtResource("1_6pska")])
 reload_sound = ExtResource("2_spwkn")

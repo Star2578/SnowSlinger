@@ -7,7 +7,7 @@ var mouse_sensitivity: float = 0.1
 var kill_count:int
 var ammo_used:int
 var weapon_pri: Weapon
-
+	
 var current_time:int = 0
 var end_time: int = 360  # Set countdown start time (in seconds)
 var timer:Timer
@@ -77,6 +77,7 @@ func update_label():
 
 func to_main_menu():
 	is_start = false
+	$Pause.visible = false
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 
