@@ -17,7 +17,9 @@ shape = SubResource("CapsuleShape3D_ao5pi")
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
 cast_shadow = 0
 billboard = 1
-render_priority = 1
+texture_filter = 0
+render_priority = 5
+texture = ExtResource("2_wrrvc")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 

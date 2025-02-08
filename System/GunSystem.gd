@@ -42,6 +42,7 @@ func shoot():
 	
 	if (parent.current_ammo <= 0) and (current_weapon.type != Weapon.WeaponType.MELEE):
 		print("Out of ammo!")
+		reload()
 		return
 	elif (not parent.can_shoot) or (parent.is_reload):
 		return

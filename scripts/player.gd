@@ -5,14 +5,14 @@ extends CharacterBody3D
 @export var floating_penalty : float = 0.8
 @export var jump_velocity: float = 4.5
 @export var snowball_scene: PackedScene
-@export var health: int = 200
+@export var health: float = 200
 
 @onready var hand: Sprite2D = $Camera3D/CanvasLayer/Control/Hand
 
 var camera: Camera3D
 var gravity: float = ProjectSettings.get("physics/3d/default_gravity")
 var anim_player: AnimationPlayer
-
+var is_cold: bool = false
 #===============[player weapon]===================
 const MELEE = preload("res://Resources/Weapon/Melee.tres")
 const SHOTGUN = preload("res://Resources/Weapon/Shotgun.tres")
@@ -70,6 +70,7 @@ func _input(event):
 				Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _physics_process(delta):
+	_update_gui()
 
 	#auto vs semi-auto
 	if Input.is_action_just_pressed("shoot") and !current_weapon.automatic:
@@ -120,6 +121,21 @@ func _physics_process(delta):
 	
 func _loop_bgm():
 	$AudioStreamPlayer3D.play()
+
+func _update_gui():
+	$Camera3D/CanvasLayer/Control/Ammo/Count.text = str(current_ammo,"/",stored_ammo)
+	$Camera3D/CanvasLayer/Control/Heat/Heatbar.scale.x = float(health / 200)
+	$Camera3D/CanvasLayer/Control/Heat/WARNING.visible = is_cold
+
+func heal(amount: float):
+	print("Heal ", amount)
+	health = min(200, health + amount)
+
+func take_damage(amount: float):
+	print("Took ", amount, " dmg")
+	health = max(0, health - amount)
+	if health <= 0:
+		print("GAME OVER!")
 
 func hotbar_swapto(n : int):
 	if n == 1:
