@@ -46,7 +46,6 @@ _data = {
 }
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_741gf"]
-load_path = "res://.godot/imported/item_ammo.png-271f7b241bfb47d35a688087ee2445d6.s3tc.ctex"
 
 [sub_resource type="LabelSettings" id="LabelSettings_13gtt"]
 font_size = 42
