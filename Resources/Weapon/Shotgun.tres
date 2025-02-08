@@ -7,12 +7,13 @@
 script = ExtResource("1_rvbqv")
 type = 3
 automatic = false
+weapon_name = "Shotgun"
 sprite = ExtResource("2_hik73")
 firing_sound = Array[AudioStream]([])
 damage = 5
 mag_size = 10
 spread = 0.3
-bullet_amount = 12
+bullet_amount = 15
 fire_rate = 1.25
 bullet_speed = 15.0
 bullet_range = 3.0

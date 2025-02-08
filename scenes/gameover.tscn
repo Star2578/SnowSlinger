@@ -91,6 +91,7 @@ offset_bottom = 40.0
 
 [node name="restart" type="Button" parent="Control"]
 custom_minimum_size = Vector2(160, 0)
+layout_mode = 0
 offset_left = 382.0
 offset_top = 438.0
 offset_right = 542.0
@@ -100,6 +101,7 @@ theme_override_font_sizes/font_size = 40
 text = "restart"
 
 [node name="back_to_menu" type="Button" parent="Control"]
+layout_mode = 0
 offset_left = 596.0
 offset_top = 438.0
 offset_right = 756.0

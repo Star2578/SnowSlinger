@@ -7,10 +7,11 @@
 script = ExtResource("1_hquup")
 type = 4
 automatic = false
+weapon_name = "Sniper"
 sprite = ExtResource("2_53flx")
 firing_sound = Array[AudioStream]([])
-damage = 20
-mag_size = 10
+damage = 100
+mag_size = 5
 spread = 0.0
 bullet_amount = 1
 fire_rate = 0.75

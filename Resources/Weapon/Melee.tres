@@ -7,13 +7,14 @@
 script = ExtResource("1_g6mf1")
 type = 0
 automatic = true
+weapon_name = "Fist"
 sprite = ExtResource("2_1jpul")
 firing_sound = Array[AudioStream]([])
-damage = 30
+damage = 35
 mag_size = 0
 spread = 0.0
 bullet_amount = 0
-fire_rate = 2.0
+fire_rate = 4.0
 bullet_speed = 0.0
 bullet_range = 3.0
 scope_mult = 1.0

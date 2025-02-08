@@ -31,15 +31,27 @@ var shootbutton_down : bool = false
 var is_reload: bool = false
 var is_zoom : bool = false
 var is_equip : bool = false
+
+var weapon_slots = [slot1, slot2]
+var current_slot_index = 0
 #=================================================
 
 func _ready():
+	slot1 = GameManager.weapon_pri
+	current_weapon = slot1
+	weapon_slots = [slot1, slot2]
 	anim_player = $Camera3D/CanvasLayer/Control/Hand/AnimationPlayer
 	hand.texture = current_weapon.sprite
 	camera = $Camera3D
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _input(event):
+	# Mouse Scroll Weapon Switching
+	if event.is_action_pressed("ui_scroll_up") or event.is_action_pressed("ui_prev_weapon"):
+		cycle_weapon(-1)  # Scroll up / LB → Previous weapon
+	elif event.is_action_pressed("ui_scroll_down") or event.is_action_pressed("ui_next_weapon"):
+		cycle_weapon(1)   # Scroll down / RB → Next weapon
+	
 	# Mouse Look (Controller uses Joystick)
 	if event is InputEventMouseMotion:
 		rotate_y(deg_to_rad(-event.relative.x * GameManager.mouse_sensitivity))
@@ -73,6 +85,11 @@ func _input(event):
 
 func _physics_process(delta):
 	_update_gui()
+	
+	if current_weapon.type == Weapon.WeaponType.MELEE:
+		speed = 8
+	else:
+		speed = 4
 
 	#auto vs semi-auto
 	if Input.is_action_just_pressed("shoot") and !current_weapon.automatic:
@@ -139,6 +156,12 @@ func take_damage(amount: float):
 	if health <= 0:
 		print("GAME OVER!")
 		GameManager.on_gameover()
+
+func cycle_weapon(direction: int):
+	current_slot_index = (current_slot_index + direction) % weapon_slots.size()
+	current_weapon = weapon_slots[current_slot_index]
+	$GunSystem.perform_swap_action(current_weapon)
+	hand.texture = current_weapon.sprite  # Update UI weapon sprite
 
 func hotbar_swapto(n : int):
 	if n == 1:

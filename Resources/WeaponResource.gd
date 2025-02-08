@@ -11,6 +11,7 @@ enum WeaponType {
 
 @export var type : WeaponType = WeaponType.BASIC_GUN
 @export var automatic : bool = false
+@export var weapon_name: String
 
 @export_category("Sprite")
 @export var sprite: CompressedTexture2D
