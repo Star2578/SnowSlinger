@@ -7,7 +7,7 @@
 script = ExtResource("1_gx6bx")
 type = 1
 automatic = false
-weapon_name = "Sling Shot"
+weapon_name = ""
 sprite = ExtResource("2_2ldo2")
 firing_sound = Array[AudioStream]([])
 damage = 35
@@ -19,3 +19,4 @@ bullet_speed = 18.0
 bullet_range = 15.0
 scope_mult = 1.0
 reload_time = 1.5
+knockback_strength = 10.0

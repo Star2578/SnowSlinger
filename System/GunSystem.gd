@@ -157,6 +157,7 @@ func perform_right_click():
 		toggle_zoom()
 		
 func toggle_zoom():
+	current_weapon = parent.current_weapon
 	var camera = $"../Camera3D"
 	if not parent.is_zoom:
 		camera.fov /= current_weapon.scope_mult
