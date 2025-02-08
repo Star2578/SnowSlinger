@@ -36,7 +36,6 @@ func _physics_process(delta):
 		
 		if global_transform.origin.distance_to(player.global_transform.origin) < 1.5:
 			attack(player)
-		
 		move_and_slide()
 
 func attack(player):
@@ -46,7 +45,6 @@ func attack(player):
 	
 	if player.has_method("take_damage"):  
 		player.take_damage(damage)
-	print(self.name)
 	attack_interval.start(1/attack_speed)
 
 func _reset_attack():
@@ -54,8 +52,7 @@ func _reset_attack():
 
 func take_damage(damage):
 	health = max(0,health - damage)
-	var direction = (global_transform.origin - player.global_transform.origin).normalized()
-	velocity += direction * knockback_strength
+	velocity = Vector3.UP * 2
 	if health <= 0:
 		ondeath()
 	print("Hp : " , health)

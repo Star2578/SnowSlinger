@@ -92,6 +92,7 @@ func initialize_snowball(weapon:Weapon):
 	snowball.maxRange = weapon.bullet_range
 	snowball.global_transform = cam_gb_transform
 	snowball.damage = weapon.damage
+	snowball.knockback_str = weapon.knockback_strength
 	
 	if weapon.spread > 0:
 		# bullet spread

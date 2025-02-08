@@ -8,6 +8,7 @@ var gravity: float = ProjectSettings.get("physics/3d/default_gravity")
 var vy:float = 0.0
 var fade_fx: Tween
 var damage
+var knockback_str:float
 
 func _ready():
 	pass
@@ -24,6 +25,8 @@ func _on_Hit(body: Node3D):
 	if !body.is_in_group("Player"):
 		if body.is_in_group("Enemy"):
 			body.take_damage(damage)
+			var direction = (body.global_transform.origin - initPos).normalized()
+			body.velocity += direction * knockback_str
 		if fade_fx != null:
 			fade_fx.kill()
 		queue_free()
