@@ -33,6 +33,7 @@ func _on_start():
 	GameManager.is_start = true
 	GameManager.weapon_pri = weapons[index]
 	get_tree().change_scene_to_file("res://scenes/level1.tscn")
+	GameManager.init_timer()
 
 func _on_quit():
 	get_tree().quit()

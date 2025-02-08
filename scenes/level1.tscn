@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://m1hhi2d72nih"]
+[gd_scene load_steps=17 format=3 uid="uid://m1hhi2d72nih"]
 
 [ext_resource type="PackedScene" uid="uid://d22080urnkn8n" path="res://entities/player.tscn" id="1_477sc"]
 [ext_resource type="PackedScene" uid="uid://ducamiudxh34i" path="res://models/tree.tscn" id="2_7fkk5"]
@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://n2trvo0vq22j" path="res://scenes/spawner.tscn" id="5_y7fsf"]
 [ext_resource type="PackedScene" uid="uid://cva3hk28usg48" path="res://entities/enemy2.tscn" id="7_dmktr"]
 [ext_resource type="PackedScene" uid="uid://2rvlxv3xfbve" path="res://entities/enemy3.tscn" id="8_sl36j"]
-[ext_resource type="Script" path="res://scenes/timer.gd" id="9_4725l"]
 
 [sub_resource type="Environment" id="Environment_ih4fx"]
 background_mode = 1
@@ -152,6 +151,3 @@ mesh = null
 [node name="MeshInstance3D4" parent="." instance=ExtResource("3_ybyso")]
 transform = Transform3D(-1.34071e-08, 0, 119.362, 0, 48.9245, 0, -0.306718, 0, -5.2175e-06, -7.30794, 23.1952, 43.5048)
 mesh = null
-
-[node name="Timer" type="Node" parent="."]
-script = ExtResource("9_4725l")
