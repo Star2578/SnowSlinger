@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://d3wa2rvxihvqx"]
+
+[ext_resource type="Texture2D" uid="uid://3oueg2iecshm" path="res://sprites/item_snow_ammo.png" id="1_ejwqo"]
+[ext_resource type="Script" path="res://items/item.gd" id="2_ols5h"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_gxb31"]
+radius = 0.25
+
+[node name="Item" type="Node3D"]
+script = ExtResource("2_ols5h")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+billboard = 1
+texture_filter = 0
+render_priority = 2
+texture = ExtResource("1_ejwqo")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_gxb31")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_item_pickup"]

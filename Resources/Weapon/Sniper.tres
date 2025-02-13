@@ -2,22 +2,24 @@
 
 [ext_resource type="Script" path="res://Resources/WeaponResource.gd" id="1_hquup"]
 [ext_resource type="AudioStream" uid="uid://emeii3tcrcj2" path="res://audio/Hit damage 1.wav" id="1_oqdw4"]
-[ext_resource type="Texture2D" uid="uid://bpkkdfpwa0w3u" path="res://sprites/sniper.png" id="2_53flx"]
 [ext_resource type="AudioStream" uid="uid://c1kvm2cqcedvu" path="res://audio/Balloon Pop 1.wav" id="2_avkfc"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xpsru"]
+load_path = "res://.godot/imported/sniper.png-005e14391c5412b5475102483ced05a4.ctex"
 
 [resource]
 script = ExtResource("1_hquup")
 type = 4
 automatic = false
 weapon_name = "Sniper"
-sprite = ExtResource("2_53flx")
+sprite = SubResource("CompressedTexture2D_xpsru")
 firing_sound = Array[AudioStream]([ExtResource("1_oqdw4")])
 reload_sound = ExtResource("2_avkfc")
-damage = 100
+damage = 75
 mag_size = 5
 spread = 0.0
 bullet_amount = 1
-fire_rate = 0.75
+fire_rate = 1.0
 bullet_speed = 80.0
 bullet_range = 60.0
 scope_mult = 2.5

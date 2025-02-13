@@ -26,8 +26,8 @@ func spawn_enemy():
 	if enemy.has_method("set_target"):
 		enemy.set_target(player)  # Assign the player as the target
 
-	get_parent().add_child.call_deferred(enemy)
-	enemy.global_transform.origin = get_random_spawn_position()
+	$"../..".add_child.call_deferred(enemy)
+	call_deferred("_set_enemy_position", enemy)
 
 func get_random_spawn_position() -> Vector3:
 	var area_size = spawn_area.mesh.size  # Get size of PlaneMesh
@@ -36,3 +36,6 @@ func get_random_spawn_position() -> Vector3:
 	var random_z = randf_range(-(area_size.y - offset) / 2, (area_size.y - offset) / 2)
 	var spawn_position = spawn_area.global_transform.origin + Vector3(random_x, 1.0, random_z)
 	return spawn_position
+
+func _set_enemy_position(enemy):
+	enemy.global_transform.origin = get_random_spawn_position()

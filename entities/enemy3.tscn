@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://2rvlxv3xfbve"]
+[gd_scene load_steps=6 format=3 uid="uid://2rvlxv3xfbve"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_0hgoo"]
 [ext_resource type="Texture2D" uid="uid://b4xs6fcae7rep" path="res://sprites/alien_2.png" id="2_ciy6s"]
+[ext_resource type="PackedScene" uid="uid://56runadj8qjg" path="res://items/ammo/ammo.tscn" id="3_7slvt"]
+[ext_resource type="PackedScene" uid="uid://bjd3r2o3u5o87" path="res://items/wood/wood.tscn" id="4_um2xp"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ao5pi"]
 
@@ -13,6 +15,7 @@ speed = 2.0
 accel = 6.0
 health = 300.0
 damage = 25
+item_drops = Array[PackedScene]([ExtResource("3_7slvt"), ExtResource("4_um2xp")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_ao5pi")

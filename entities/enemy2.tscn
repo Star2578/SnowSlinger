@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cva3hk28usg48"]
+[gd_scene load_steps=6 format=3 uid="uid://cva3hk28usg48"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_4om1f"]
 [ext_resource type="Texture2D" uid="uid://b5oqgylyopej5" path="res://sprites/alien_1.png" id="2_wrrvc"]
+[ext_resource type="PackedScene" uid="uid://56runadj8qjg" path="res://items/ammo/ammo.tscn" id="3_34yql"]
+[ext_resource type="PackedScene" uid="uid://bjd3r2o3u5o87" path="res://items/wood/wood.tscn" id="4_fqd6g"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ao5pi"]
 
@@ -11,6 +13,7 @@ script = ExtResource("1_4om1f")
 sprite = ExtResource("2_wrrvc")
 health = 150.0
 damage = 20
+item_drops = Array[PackedScene]([ExtResource("3_34yql"), ExtResource("4_fqd6g")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_ao5pi")

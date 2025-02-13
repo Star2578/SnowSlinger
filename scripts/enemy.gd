@@ -10,7 +10,7 @@ extends CharacterBody3D
 @export var knockback_strength: float = 3.0
 
 @export var item_drops: Array[PackedScene]
-@export var drop_chance: float = 0.3
+@export var drop_chance: float = 0.5
 
 @onready var navigation_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var sprite3d: Sprite3D = $Sprite3D
@@ -69,21 +69,22 @@ func ondeath():
 	
 	GameManager.kill_count += 1
 	drop_item()
-	queue_free()
 
 func drop_item():
-	# No item drop no, just increase ammo :(
+	if item_drops.is_empty():
+		return  # No items to drop
+
 	if randf() < drop_chance:
-		player.stored_ammo += randi_range(0, 4)
-	#if item_drops.is_empty():
-		#return  # No items to drop
-#
-	#if randf() < drop_chance:
-		#var random_item = item_drops.pick_random()
-		#var item_instance = random_item.instantiate()
-		#item_instance.global_transform.origin = global_transform.origin
-		#get_parent().add_child(item_instance)
-#
-		#print("Dropped item:", item_instance.name)
-	#else:
-		#print("No item dropped this time!")
+		var random_item = item_drops.pick_random()
+		var item_instance = random_item.instantiate()
+		get_tree().root.add_child.call_deferred(item_instance)
+		call_deferred("_set_item_position", item_instance)
+
+		print("Dropped item:", item_instance.name)
+	else:
+		queue_free()
+		print("No item dropped this time!")
+
+func _set_item_position(item_instance):
+	item_instance.global_transform.origin = global_transform.origin
+	queue_free()

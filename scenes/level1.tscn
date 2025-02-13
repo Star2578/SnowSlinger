@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://m1hhi2d72nih"]
+[gd_scene load_steps=18 format=3 uid="uid://m1hhi2d72nih"]
 
 [ext_resource type="PackedScene" uid="uid://d22080urnkn8n" path="res://entities/player.tscn" id="1_477sc"]
 [ext_resource type="PackedScene" uid="uid://ducamiudxh34i" path="res://models/tree.tscn" id="2_7fkk5"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b6x1e677aeyrl" path="res://models/campfire.tscn" id="4_j33yu"]
 [ext_resource type="PackedScene" uid="uid://dvevfkgigl3up" path="res://entities/enemy1.tscn" id="5_2o22i"]
 [ext_resource type="PackedScene" uid="uid://n2trvo0vq22j" path="res://scenes/spawner.tscn" id="5_y7fsf"]
+[ext_resource type="PackedScene" uid="uid://56runadj8qjg" path="res://items/ammo/ammo.tscn" id="7_3uxft"]
 [ext_resource type="PackedScene" uid="uid://cva3hk28usg48" path="res://entities/enemy2.tscn" id="7_dmktr"]
 [ext_resource type="PackedScene" uid="uid://2rvlxv3xfbve" path="res://entities/enemy3.tscn" id="8_sl36j"]
 
@@ -120,7 +121,7 @@ player = NodePath("../../Player")
 warm_range = 10.0
 
 [node name="Spawner" parent="NavigationRegion3D" node_paths=PackedStringArray("player", "spawn_area") instance=ExtResource("5_y7fsf")]
-enemy_scenes = Array[PackedScene]([ExtResource("5_2o22i"), ExtResource("7_dmktr"), ExtResource("8_sl36j")])
+enemy_scenes = Array[PackedScene]([ExtResource("5_2o22i"), ExtResource("7_dmktr"), ExtResource("8_sl36j"), ExtResource("7_3uxft")])
 player = NodePath("../../Player")
 spawn_area = NodePath("../StaticBody3D/MeshInstance3D")
 
