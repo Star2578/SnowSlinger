@@ -5,7 +5,7 @@
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_utycp"]
 
-[node name="Snowball" type="Area3D"]
+[node name="Snowball" type="Area3D" groups=["Billboard_Sprites"]]
 script = ExtResource("1_mt825")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]

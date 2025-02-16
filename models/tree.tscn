@@ -1,16 +1,35 @@
-[gd_scene load_steps=3 format=3 uid="uid://ducamiudxh34i"]
+[gd_scene load_steps=9 format=3 uid="uid://ducamiudxh34i"]
 
 [ext_resource type="Texture2D" uid="uid://dm2bhimtii1pj" path="res://sprites/tree.png" id="1_iy1qv"]
+[ext_resource type="Script" path="res://scripts/tree.gd" id="1_mpfw7"]
+[ext_resource type="FontFile" uid="uid://dtp2nbohivb28" path="res://font/Minecraft.ttf" id="3_2fjlh"]
+[ext_resource type="AudioStream" uid="uid://c46qkewgs1ktr" path="res://audio/Fruit collect 1.wav" id="4_7edvn"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o0lq2"]
 
-[node name="Tree" type="Node3D"]
+[sub_resource type="LabelSettings" id="LabelSettings_ech2y"]
+font = ExtResource("3_2fjlh")
+font_size = 18
+font_color = Color(0, 0, 0, 1)
+outline_size = 4
+
+[sub_resource type="LabelSettings" id="LabelSettings_gtfib"]
+font = ExtResource("3_2fjlh")
+font_size = 18
+font_color = Color(0, 0, 0, 1)
+outline_size = 4
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_3v6l5"]
+radius = 2.5
+
+[node name="Tree" type="Node3D" groups=["Billboard_Sprites"]]
+script = ExtResource("1_mpfw7")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, 0, 0, 0)
 billboard = 1
 texture_filter = 0
-render_priority = 2
+render_priority = 3
 texture = ExtResource("1_iy1qv")
 
 [node name="Node3D" type="Node3D" parent="Sprite3D"]
@@ -20,3 +39,79 @@ texture = ExtResource("1_iy1qv")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_o0lq2")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Header" type="Label" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.5
+offset_top = -11.5
+offset_right = 100.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Press F to collect wood"
+label_settings = SubResource("LabelSettings_ech2y")
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -65.0
+offset_top = -48.0
+offset_right = 65.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Chopping Wood"
+label_settings = SubResource("LabelSettings_gtfib")
+
+[node name="Progress" type="ColorRect" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -15.0
+offset_right = 250.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.295, 1)
+color = Color(0, 0, 0, 1)
+
+[node name="DestroyedSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_7edvn")
+
+[node name="Area3D" type="Area3D" parent="."]
+priority = 5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_3v6l5")
+
+[connection signal="finished" from="DestroyedSound" to="." method="_clean_node"]
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_exited"]

@@ -5,18 +5,19 @@ extends CharacterBody3D
 @export var speed: float = 3.0
 @export var accel: float = 5.0
 @export var health: float = 100
-@export var attack_speed:float = 0.5
+@export var attack_speed: float = 0.5
 @export var damage: int = 2
 @export var knockback_strength: float = 3.0
 
 @export var item_drops: Array[PackedScene]
-@export var drop_chance: float = 0.5
+@export var drop_chance: float = 0.25
 
 @onready var navigation_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var sprite3d: Sprite3D = $Sprite3D
 @onready var attack_interval: Timer = $AttackInterval
 
 var can_attack : bool = true
+var is_dead: bool = false
 
 func _ready():
 	sprite3d.texture = sprite
@@ -51,17 +52,29 @@ func _reset_attack():
 	can_attack = true
 
 func take_damage(damage):
+	flash_black()
+	
 	health = max(0,health - damage)
 	velocity = Vector3.UP * 2
 	if health <= 0:
 		ondeath()
 	print("Hp : " , health)
 
+func flash_black():
+	$Sprite3D.modulate = Color.BLACK  # Turn black
+	
+	await get_tree().create_timer(0.2).timeout  # Wait 0.2 seconds
+	$Sprite3D.modulate = Color.WHITE  # Restore original color
+
 func set_target(target: Node3D):
 	player = target
 
 func ondeath():
-	$Sprite3D.modulate = "#ffffff"
+	if is_dead:
+		return
+	
+	is_dead = true
+	$Sprite3D.modulate = "#000000"
 	var dtween = get_tree().create_tween()
 	dtween.tween_property($Sprite3D, "modulate:a", 0, 0.5)
 	
@@ -69,6 +82,7 @@ func ondeath():
 	
 	GameManager.kill_count += 1
 	drop_item()
+	queue_free()
 
 func drop_item():
 	if item_drops.is_empty():
@@ -82,7 +96,6 @@ func drop_item():
 
 		print("Dropped item:", item_instance.name)
 	else:
-		queue_free()
 		print("No item dropped this time!")
 
 func _set_item_position(item_instance):

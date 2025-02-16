@@ -22,6 +22,7 @@ enum WeaponType {
 @export var dry_fire_sound : AudioStream
 
 @export_category("Weapown Stats")
+@export var pierce : bool
 @export var damage : int
 @export var mag_size : int #number of ammo loaded in gun
 @export var spread : float = 0

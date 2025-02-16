@@ -29,4 +29,5 @@ func _on_Hit(body: Node3D):
 			body.velocity += direction * knockback_str
 		if fade_fx != null:
 			fade_fx.kill()
-		queue_free()
+		if !GameManager.weapon_pri.pierce:
+			queue_free()

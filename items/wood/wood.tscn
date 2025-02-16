@@ -15,7 +15,7 @@ item_data = ExtResource("2_ouq6t")
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 billboard = 1
 texture_filter = 0
-render_priority = 2
+render_priority = 3
 texture = ExtResource("3_iiof3")
 
 [node name="Area3D" type="Area3D" parent="."]

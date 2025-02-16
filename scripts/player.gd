@@ -42,6 +42,7 @@ func _ready():
 	current_weapon = slot1
 	weapon_slots = [slot1, slot2]
 	current_ammo = current_weapon.mag_size
+	stored_ammo = current_weapon.mag_size * 5
 	anim_player = $Camera3D/CanvasLayer/Control/Hand/AnimationPlayer
 	hand.texture = current_weapon.sprite
 	camera = $Camera3D
@@ -141,21 +142,22 @@ func _physics_process(delta):
 			velocity.z = 0
 			
 	move_and_slide()
-	
+
 func _loop_bgm():
 	$AudioStreamPlayer3D.play()
 
 func _update_gui():
 	$Camera3D/CanvasLayer/Control/Ammo/Count.text = str(current_ammo,"/",stored_ammo)
-	$Camera3D/CanvasLayer/Control/Heat/Heatbar.scale.x = float(health / 200)
+	$Camera3D/CanvasLayer/Control/Health/Healthbar.scale.x = float(health / 200)
+	$Camera3D/CanvasLayer/Control/Heat/Heatbar.scale.x = float(GameManager.campfire_energy / 100)
 	$Camera3D/CanvasLayer/Control/Heat/WARNING.visible = is_cold
 
 func heal(amount: float):
-	print("Heal ", amount)
+	#print("Heal ", amount)
 	health = min(200, health + amount)
 
 func take_damage(amount: float):
-	print("Took ", amount, " dmg")
+	#print("Took ", amount, " dmg")
 	health = max(0, health - amount)
 	$Camera3D/HitSound.play()
 	if health <= 0:

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c46qkewgs1ktr"
+path="res://.godot/imported/Fruit collect 1.wav-693a9d83a58b420323e93568ac779563.sample"
+
+[deps]
+
+source_file="res://audio/Fruit collect 1.wav"
+dest_files=["res://.godot/imported/Fruit collect 1.wav-693a9d83a58b420323e93568ac779563.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

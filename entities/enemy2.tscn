@@ -7,13 +7,13 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ao5pi"]
 
-[node name="Enemy" type="CharacterBody3D" groups=["Enemy"]]
-transform = Transform3D(0.72, 0, 0, 0, 0.72, 0, 0, 0, 0.72, 0, 0, 0)
+[node name="Enemy" type="CharacterBody3D" groups=["Billboard_Sprites", "Enemy"]]
 script = ExtResource("1_4om1f")
 sprite = ExtResource("2_wrrvc")
 health = 150.0
 damage = 20
 item_drops = Array[PackedScene]([ExtResource("3_34yql"), ExtResource("4_fqd6g")])
+drop_chance = 0.4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_ao5pi")
@@ -23,7 +23,7 @@ transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
 cast_shadow = 0
 billboard = 1
 texture_filter = 0
-render_priority = 5
+render_priority = 3
 texture = ExtResource("2_wrrvc")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]

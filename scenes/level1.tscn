@@ -125,6 +125,11 @@ enemy_scenes = Array[PackedScene]([ExtResource("5_2o22i"), ExtResource("7_dmktr"
 player = NodePath("../../Player")
 spawn_area = NodePath("../StaticBody3D/MeshInstance3D")
 
+[node name="Spawner2" parent="NavigationRegion3D" node_paths=PackedStringArray("player", "spawn_area") instance=ExtResource("5_y7fsf")]
+enemy_scenes = Array[PackedScene]([ExtResource("5_2o22i"), ExtResource("7_dmktr"), ExtResource("8_sl36j"), ExtResource("7_3uxft")])
+player = NodePath("../../Player")
+spawn_area = NodePath("../StaticBody3D/MeshInstance3D")
+
 [node name="Player" parent="." instance=ExtResource("1_477sc")]
 transform = Transform3D(0.72, 0, 0, 0, 0.72, 0, 0, 0, 0.72, 1, 1, 4)
 

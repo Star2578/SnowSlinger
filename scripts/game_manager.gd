@@ -7,7 +7,10 @@ var mouse_sensitivity: float = 0.1
 var kill_count:int
 var ammo_used:int
 var weapon_pri: Weapon
-	
+
+var campfire_energy_max: float = 100
+var campfire_energy: float = campfire_energy_max
+
 var current_time:int = 0
 var end_time: int = 360  # Set countdown start time (in seconds)
 var timer:Timer
@@ -33,7 +36,10 @@ func _input(event):
 			else:
 				Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 				timer.start()
-			
+
+func _physics_process(delta):
+	campfire_energy -= delta
+
 func on_gameover():
 	timer.stop()
 	current_time = 0
